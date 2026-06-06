@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mi Negocio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -35,64 +35,248 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;}
 
-/* ── LANDING PAGE ── */
-.lp{display:flex;flex-direction:column;min-height:100vh;background:#0C2B1F;color:#EAF5F0;overflow-x:hidden;}
-.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:0.5px solid rgba(255,255,255,.08);}
-.lp-nav-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#5DCAA5;letter-spacing:.08em;text-transform:uppercase;}
-.lp-nav-logo i{font-size:18px;}
-.lp-nav-actions{display:flex;align-items:center;gap:10px;}
-.lp-btn-ghost{padding:8px 16px;border-radius:8px;border:0.5px solid rgba(255,255,255,.2);background:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
-.lp-btn-ghost:hover{background:rgba(255,255,255,.06);color:#EAF5F0;}
-.lp-btn-wa{padding:8px 16px;border-radius:8px;border:none;background:#25D366;color:#fff;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:opacity .15s;}
-.lp-btn-wa:hover{opacity:.88;}
-/* Hero */
-.lp-hero{padding:60px 24px 48px;max-width:680px;}
-.lp-hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5DCAA5;border:0.5px solid rgba(93,202,165,.3);padding:4px 12px;border-radius:20px;margin-bottom:24px;letter-spacing:.04em;}
-.lp-hero-h1{font-size:clamp(36px,7vw,64px);font-weight:500;line-height:1.08;letter-spacing:-.03em;margin-bottom:20px;color:#EAF5F0;}
-.lp-hero-h1 em{color:#5DCAA5;font-style:normal;}
-.lp-hero-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:36px;max-width:480px;}
-.lp-hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
-.lp-cta-primary{padding:13px 24px;border-radius:8px;border:none;background:#5DCAA5;color:#0C2B1F;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.01em;transition:opacity .15s;}
-.lp-cta-primary:hover{opacity:.88;}
-.lp-cta-secondary{padding:13px 24px;border-radius:8px;border:0.5px solid rgba(255,255,255,.15);background:none;color:rgba(255,255,255,.7);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
-.lp-cta-secondary:hover{background:rgba(255,255,255,.06);color:#EAF5F0;}
-/* Stats */
-.lp-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:0.5px solid rgba(255,255,255,.08);border-bottom:0.5px solid rgba(255,255,255,.08);}
-.lp-stat{padding:24px;border-right:0.5px solid rgba(255,255,255,.08);}
+/* ── LANDING PAGE — Cinematic Editorial ── */
+.lp{
+  display:flex;flex-direction:column;min-height:100vh;
+  background:#0A1A10;color:#EAF5F0;overflow-x:hidden;
+  font-family:'DM Sans',sans-serif;
+}
+/* NAV */
+.lp-nav{
+  position:absolute;top:0;left:0;right:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 28px;
+}
+.lp-nav-logo{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.9);
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.lp-nav-logo i{font-size:16px;color:#5DCAA5;}
+.lp-nav-actions{display:flex;align-items:center;gap:8px;}
+.lp-btn-ghost{
+  padding:7px 18px;border-radius:50px;
+  border:0.5px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.7);font-size:12px;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:all .2s;backdrop-filter:blur(4px);
+}
+.lp-btn-ghost:hover{background:rgba(255,255,255,.1);color:#EAF5F0;}
+.lp-btn-wa{
+  padding:7px 16px;border-radius:50px;border:none;
+  background:#25D366;color:#fff;font-size:12px;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;gap:5px;transition:opacity .2s;
+}
+.lp-btn-wa:hover{opacity:.85;}
+
+/* HERO FRAME — la "ventana" cinemática */
+.lp-hero-frame{
+  position:relative;margin:100px 16px 0;
+  border-radius:20px;overflow:hidden;
+  border:0.5px solid rgba(255,255,255,.1);
+  min-height:520px;
+  background:#0C2B1F;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-start;padding:56px 24px 0;
+}
+/* Textura de fondo del frame — sin imágenes */
+.lp-hero-frame::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 80%, rgba(15,110,86,.35) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(193,154,80,.08) 0%, transparent 60%);
+  pointer-events:none;
+}
+.lp-hero-frame::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+}
+.lp-hero-tag{
+  position:relative;z-index:2;
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;color:rgba(93,202,165,.9);
+  border:0.5px solid rgba(93,202,165,.25);
+  padding:4px 14px;border-radius:50px;
+  margin-bottom:28px;letter-spacing:.06em;
+  background:rgba(93,202,165,.06);
+}
+.lp-hero-h1{
+  position:relative;z-index:2;
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(38px,8vw,72px);
+  font-weight:400;line-height:1.06;
+  letter-spacing:-.02em;
+  text-align:center;
+  color:#EAF5F0;margin-bottom:16px;
+}
+.lp-hero-h1 em{color:#5DCAA5;font-style:italic;}
+.lp-hero-sub{
+  position:relative;z-index:2;
+  font-size:15px;color:rgba(255,255,255,.45);
+  line-height:1.65;text-align:center;
+  max-width:420px;margin-bottom:32px;
+}
+.lp-hero-ctas{
+  position:relative;z-index:2;
+  display:flex;gap:10px;flex-wrap:wrap;
+  justify-content:center;margin-bottom:48px;
+}
+.lp-cta-primary{
+  padding:12px 28px;border-radius:50px;border:none;
+  background:#5DCAA5;color:#0A1A10;
+  font-size:13px;font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:.02em;transition:opacity .2s;
+}
+.lp-cta-primary:hover{opacity:.85;}
+.lp-cta-secondary{
+  padding:12px 28px;border-radius:50px;
+  border:0.5px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);
+  color:rgba(255,255,255,.7);font-size:13px;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  transition:all .2s;backdrop-filter:blur(4px);
+}
+.lp-cta-secondary:hover{background:rgba(255,255,255,.1);color:#EAF5F0;}
+
+/* MOCKUP CSS — el "producto" flotando */
+.lp-mockup{
+  position:relative;z-index:2;
+  width:100%;max-width:340px;
+  background:rgba(15,30,20,.85);
+  border:0.5px solid rgba(255,255,255,.12);
+  border-radius:16px 16px 0 0;
+  padding:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 -8px 40px rgba(0,0,0,.4);
+}
+.lp-mock-label{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+.lp-mock-amount{font-size:36px;font-weight:500;color:#EAF5F0;font-family:'DM Mono',monospace;letter-spacing:-.02em;margin-bottom:2px;}
+.lp-mock-sub{font-size:11px;color:rgba(93,202,165,.7);margin-bottom:16px;}
+.lp-mock-chips{display:flex;gap:6px;margin-bottom:16px;}
+.lp-mock-chip{padding:4px 10px;border-radius:6px;font-size:10px;font-family:'DM Mono',monospace;}
+.lp-mock-chip.green{background:rgba(93,202,165,.15);color:#5DCAA5;}
+.lp-mock-chip.amber{background:rgba(193,154,80,.15);color:#C19A50;}
+.lp-mock-bars{display:flex;align-items:flex-end;gap:4px;height:40px;}
+.lp-mock-bar{flex:1;border-radius:3px 3px 0 0;background:rgba(93,202,165,.2);}
+.lp-mock-bar.hi{background:rgba(93,202,165,.6);}
+
+/* STATS */
+.lp-stats{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  border-top:0.5px solid rgba(255,255,255,.06);
+  margin-top:0;
+}
+.lp-stat{padding:28px 24px;border-right:0.5px solid rgba(255,255,255,.06);}
 .lp-stat:nth-child(2n){border-right:none;}
-.lp-stat-num{font-size:28px;font-weight:500;color:#EAF5F0;font-family:'DM Mono',monospace;letter-spacing:-.02em;}
+.lp-stat-num{
+  font-family:'DM Serif Display',serif;
+  font-size:36px;color:#EAF5F0;line-height:1;margin-bottom:4px;
+}
 .lp-stat-num.accent{color:#5DCAA5;}
-.lp-stat-lbl{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;}
-/* Features */
-.lp-section{padding:48px 24px;}
-.lp-section-tag{font-size:11px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:32px;}
-.lp-features{display:flex;flex-direction:column;}
-.lp-feat{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:0.5px solid rgba(255,255,255,.06);}
-.lp-feat:last-child{border-bottom:none;}
-.lp-feat-name{font-size:15px;color:rgba(255,255,255,.75);}
-.lp-feat-dot{width:8px;height:8px;border-radius:50%;background:#5DCAA5;flex-shrink:0;}
-/* Rubros */
-.lp-rubros{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
-.lp-rubro-chip{padding:6px 14px;border-radius:20px;border:0.5px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);}
-.lp-rubro-chip.more{color:#5DCAA5;border-color:rgba(93,202,165,.3);}
-/* Pricing */
-.lp-price-card{background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.1);border-radius:12px;padding:28px 24px;margin:0 24px 48px;}
-.lp-price-badge{display:inline-block;font-size:11px;color:#5DCAA5;border:0.5px solid rgba(93,202,165,.3);padding:3px 10px;border-radius:20px;margin-bottom:16px;letter-spacing:.04em;}
-.lp-price-num{font-size:44px;font-weight:500;color:#EAF5F0;font-family:'DM Mono',monospace;letter-spacing:-.03em;margin-bottom:4px;}
-.lp-price-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:24px;line-height:1.5;}
-.lp-price-cta{width:100%;padding:13px;border-radius:8px;border:none;background:#5DCAA5;color:#0C2B1F;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;}
-.lp-price-cta:hover{opacity:.88;}
-/* Footer */
-.lp-footer{padding:24px;border-top:0.5px solid rgba(255,255,255,.06);font-size:12px;color:rgba(255,255,255,.2);text-align:center;}
-/* Desktop */
+.lp-stat-lbl{font-size:12px;color:rgba(255,255,255,.35);line-height:1.4;}
+
+/* FEATURES */
+.lp-section{padding:56px 24px;}
+.lp-section-title{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(26px,5vw,40px);
+  color:#EAF5F0;line-height:1.15;
+  letter-spacing:-.02em;margin-bottom:8px;
+}
+.lp-section-sub{font-size:14px;color:rgba(255,255,255,.35);margin-bottom:40px;line-height:1.6;}
+.lp-feats-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.06);}
+.lp-feat{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 20px;background:#0A1A10;
+  transition:background .15s;cursor:default;
+}
+.lp-feat:hover{background:#0f2318;}
+.lp-feat-name{font-size:14px;color:rgba(255,255,255,.7);}
+.lp-feat-dot{width:6px;height:6px;border-radius:50%;background:#5DCAA5;flex-shrink:0;}
+
+/* RUBROS */
+.lp-rubros-wrap{padding:0 24px 56px;}
+.lp-section-tag{font-size:10px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.12em;margin-bottom:16px;}
+.lp-rubros{display:flex;flex-wrap:wrap;gap:8px;}
+.lp-rubro-chip{
+  padding:6px 14px;border-radius:50px;
+  border:0.5px solid rgba(255,255,255,.1);
+  font-size:12px;color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.03);transition:all .15s;
+}
+.lp-rubro-chip:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);}
+.lp-rubro-chip.more{color:#5DCAA5;border-color:rgba(93,202,165,.25);}
+
+/* PRICING */
+.lp-pricing{padding:0 16px 64px;}
+.lp-price-card{
+  background:#0C2B1F;
+  border:0.5px solid rgba(93,202,165,.2);
+  border-radius:20px;padding:40px 32px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.lp-price-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 50% 100%, rgba(93,202,165,.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.lp-price-badge{
+  display:inline-block;font-size:11px;color:#5DCAA5;
+  border:0.5px solid rgba(93,202,165,.3);
+  padding:3px 12px;border-radius:50px;margin-bottom:20px;
+  letter-spacing:.06em;
+}
+.lp-price-eyebrow{
+  font-size:13px;color:rgba(255,255,255,.35);
+  margin-bottom:8px;letter-spacing:.04em;
+}
+.lp-price-num{
+  font-family:'DM Serif Display',serif;
+  font-size:64px;color:#EAF5F0;line-height:1;
+  letter-spacing:-.03em;margin-bottom:6px;position:relative;z-index:1;
+}
+.lp-price-sub{font-size:13px;color:rgba(255,255,255,.35);margin-bottom:32px;line-height:1.6;position:relative;z-index:1;}
+.lp-price-cta{
+  padding:14px 40px;border-radius:50px;border:none;
+  background:#5DCAA5;color:#0A1A10;
+  font-size:14px;font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:opacity .2s;
+  position:relative;z-index:1;
+}
+.lp-price-cta:hover{opacity:.85;}
+
+/* FOOTER */
+.lp-footer{
+  padding:28px 24px;
+  border-top:0.5px solid rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.lp-footer-logo{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.08em;text-transform:uppercase;}
+.lp-footer-copy{font-size:12px;color:rgba(255,255,255,.15);}
+
+/* RESPONSIVE */
 @media(min-width:768px){
-  .lp-nav{padding:20px 48px;}
-  .lp-hero{padding:80px 48px 64px;max-width:800px;}
+  .lp-nav{padding:24px 48px;}
+  .lp-hero-frame{margin:90px 24px 0;min-height:580px;padding:64px 48px 0;}
+  .lp-hero-h1{font-size:clamp(52px,7vw,80px);}
+  .lp-mockup{max-width:420px;}
   .lp-stats{grid-template-columns:repeat(4,1fr);}
-  .lp-stat{border-right:0.5px solid rgba(255,255,255,.08);}
+  .lp-stat{border-right:0.5px solid rgba(255,255,255,.06);}
   .lp-stat:last-child{border-right:none;}
-  .lp-section{padding:64px 48px;}
-  .lp-price-card{margin:0 48px 64px;}
+  .lp-stat:nth-child(2n){border-right:0.5px solid rgba(255,255,255,.06);}
+  .lp-section{padding:80px 48px;}
+  .lp-rubros-wrap{padding:0 48px 80px;}
+  .lp-pricing{padding:0 48px 80px;}
+  .lp-feats-grid{grid-template-columns:1fr 1fr;}
+  .lp-footer{padding:28px 48px;}
 }
 
 /* ── AUTH SCREEN — Split Editorial ── */
@@ -663,72 +847,118 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 <body>
 
 <!-- SELECCIÓN DE PERFIL -->
-<!-- LANDING PAGE -->
+<!-- LANDING PAGE — Cinematic Editorial -->
 <div class="lp" id="landing-page">
+
   <nav class="lp-nav">
     <div class="lp-nav-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
     <div class="lp-nav-actions">
       <button class="lp-btn-ghost" onclick="showAuthFromLanding('login')">Iniciar sesión</button>
-      <a class="lp-btn-wa" href="https://wa.me/5491100000000" target="_blank"><i class="ti ti-brand-whatsapp"></i> Consultas</a>
+      <a class="lp-btn-wa" href="https://wa.me/5491100000000" target="_blank" rel="noopener"><i class="ti ti-brand-whatsapp"></i> Consultas</a>
     </div>
   </nav>
 
-  <div class="lp-hero">
+  <!-- HERO FRAME cinemático -->
+  <div class="lp-hero-frame">
     <div class="lp-hero-tag"><i class="ti ti-sparkles"></i> 14 días gratis · Sin tarjeta</div>
-    <h1 class="lp-hero-h1">Tu comercio,<br>bajo <em>control</em><br>total.</h1>
+    <h1 class="lp-hero-h1">Tu comercio,<br>bajo <em>control</em> total.</h1>
     <p class="lp-hero-sub">Ventas, caja, fiados y productos en una sola app. Para cualquier rubro, desde el primer día.</p>
     <div class="lp-hero-ctas">
-      <button class="lp-cta-primary" onclick="showAuthFromLanding('register')">Empezar gratis →</button>
+      <button class="lp-cta-primary" onclick="showAuthFromLanding('register')">Empezar gratis</button>
       <button class="lp-cta-secondary" onclick="showAuthFromLanding('login')">Ya tengo cuenta</button>
     </div>
-  </div>
-
-  <div class="lp-stats">
-    <div class="lp-stat"><div class="lp-stat-num accent">+29</div><div class="lp-stat-lbl">rubros soportados</div></div>
-    <div class="lp-stat"><div class="lp-stat-num">14 días</div><div class="lp-stat-lbl">prueba gratis · sin tarjeta</div></div>
-    <div class="lp-stat"><div class="lp-stat-num accent">24/7</div><div class="lp-stat-lbl">soporte vía WhatsApp</div></div>
-    <div class="lp-stat"><div class="lp-stat-num">$0</div><div class="lp-stat-lbl">para empezar hoy</div></div>
-  </div>
-
-  <div class="lp-section">
-    <div class="lp-section-tag">Funcionalidades</div>
-    <div class="lp-features">
-      <div class="lp-feat"><span class="lp-feat-name">Ventas con múltiples medios de pago</span><span class="lp-feat-dot"></span></div>
-      <div class="lp-feat"><span class="lp-feat-name">Caja diaria con cierre automático</span><span class="lp-feat-dot"></span></div>
-      <div class="lp-feat"><span class="lp-feat-name">Fiados y cuenta corriente</span><span class="lp-feat-dot"></span></div>
-      <div class="lp-feat"><span class="lp-feat-name">Catálogo de productos por rubro</span><span class="lp-feat-dot"></span></div>
-      <div class="lp-feat"><span class="lp-feat-name">Gráficas de ventas y clientes</span><span class="lp-feat-dot"></span></div>
-      <div class="lp-feat"><span class="lp-feat-name">Calculadora de precios y márgenes</span><span class="lp-feat-dot"></span></div>
-      <div class="lp-feat"><span class="lp-feat-name">Acceso para empleados</span><span class="lp-feat-dot"></span></div>
-    </div>
-
-    <div style="margin-top:48px;">
-      <div class="lp-section-tag">Rubros soportados</div>
-      <div class="lp-rubros">
-        <span class="lp-rubro-chip">Panadería / Confitería</span>
-        <span class="lp-rubro-chip">Fiambrería</span>
-        <span class="lp-rubro-chip">Despensa / Almacén</span>
-        <span class="lp-rubro-chip">Verdulería / Frutería</span>
-        <span class="lp-rubro-chip">Carnicería</span>
-        <span class="lp-rubro-chip">Dietética</span>
-        <span class="lp-rubro-chip">Rotisería</span>
-        <span class="lp-rubro-chip">Kiosco</span>
-        <span class="lp-rubro-chip">Farmacia</span>
-        <span class="lp-rubro-chip">Ferretería</span>
-        <span class="lp-rubro-chip">Ropa y accesorios</span>
-        <span class="lp-rubro-chip more">+18 más →</span>
+    <!-- Mockup CSS del dashboard -->
+    <div class="lp-mockup">
+      <div class="lp-mock-label">Ganaste hoy</div>
+      <div class="lp-mock-amount">$48.500</div>
+      <div class="lp-mock-sub">↑ 12% vs ayer · Efectivo + Transferencia</div>
+      <div class="lp-mock-chips">
+        <span class="lp-mock-chip green">Ventas $61.200</span>
+        <span class="lp-mock-chip amber">Fiados $8.400</span>
+      </div>
+      <div class="lp-mock-bars">
+        <div class="lp-mock-bar" style="height:35%"></div>
+        <div class="lp-mock-bar" style="height:55%"></div>
+        <div class="lp-mock-bar" style="height:40%"></div>
+        <div class="lp-mock-bar" style="height:70%"></div>
+        <div class="lp-mock-bar" style="height:50%"></div>
+        <div class="lp-mock-bar" style="height:85%"></div>
+        <div class="lp-mock-bar hi" style="height:100%"></div>
       </div>
     </div>
   </div>
 
-  <div class="lp-price-card">
-    <div class="lp-price-badge">Plan gratuito disponible</div>
-    <div class="lp-price-num">$0</div>
-    <div class="lp-price-sub">Para siempre en el plan base.<br>Sin contratos, sin sorpresas.</div>
-    <button class="lp-price-cta" onclick="showAuthFromLanding('register')">Crear cuenta gratis →</button>
+  <!-- STATS -->
+  <div class="lp-stats">
+    <div class="lp-stat">
+      <div class="lp-stat-num accent">+29</div>
+      <div class="lp-stat-lbl">rubros soportados</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-num">14</div>
+      <div class="lp-stat-lbl">días gratis · sin tarjeta</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-num accent">24/7</div>
+      <div class="lp-stat-lbl">soporte vía WhatsApp</div>
+    </div>
+    <div class="lp-stat">
+      <div class="lp-stat-num">$0</div>
+      <div class="lp-stat-lbl">para empezar hoy</div>
+    </div>
   </div>
 
-  <div class="lp-footer">© 2025 Mi Negocio · Hecho para comercios argentinos</div>
+  <!-- FEATURES -->
+  <div class="lp-section">
+    <div class="lp-section-title">Todo lo que<br>tu comercio necesita.</div>
+    <div class="lp-section-sub">Sin planillas, sin complejidad. Todo en un lugar.</div>
+    <div class="lp-feats-grid">
+      <div class="lp-feat"><span class="lp-feat-name">Ventas con múltiples medios de pago</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Caja diaria con cierre automático</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Fiados y cuenta corriente</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Catálogo pre-cargado por rubro</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Gráficas de ventas y clientes</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Calculadora de precios y márgenes</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Acceso diferenciado para empleados</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Datos seguros en la nube</span><span class="lp-feat-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- RUBROS -->
+  <div class="lp-rubros-wrap">
+    <div class="lp-section-tag">Rubros soportados</div>
+    <div class="lp-rubros">
+      <span class="lp-rubro-chip">Panadería / Confitería</span>
+      <span class="lp-rubro-chip">Fiambrería</span>
+      <span class="lp-rubro-chip">Despensa / Almacén</span>
+      <span class="lp-rubro-chip">Verdulería / Frutería</span>
+      <span class="lp-rubro-chip">Carnicería</span>
+      <span class="lp-rubro-chip">Dietética</span>
+      <span class="lp-rubro-chip">Rotisería</span>
+      <span class="lp-rubro-chip">Kiosco</span>
+      <span class="lp-rubro-chip">Farmacia</span>
+      <span class="lp-rubro-chip">Ferretería</span>
+      <span class="lp-rubro-chip">Ropa y accesorios</span>
+      <span class="lp-rubro-chip more">+18 más →</span>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="lp-pricing">
+    <div class="lp-price-card">
+      <div class="lp-price-badge">Plan gratuito disponible</div>
+      <div class="lp-price-eyebrow">Empezá hoy mismo</div>
+      <div class="lp-price-num">$0</div>
+      <div class="lp-price-sub">Para siempre en el plan base.<br>Sin contratos, sin sorpresas.</div>
+      <button class="lp-price-cta" onclick="showAuthFromLanding('register')">Crear cuenta gratis</button>
+    </div>
+  </div>
+
+  <div class="lp-footer">
+    <div class="lp-footer-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
+    <div class="lp-footer-copy">© 2025 · Hecho para comercios argentinos</div>
+  </div>
+
 </div>
 
 <!-- AUTH SCREEN — Split Editorial -->
