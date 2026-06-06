@@ -468,9 +468,19 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
       <div class="auth-field"><label>Rubro</label>
         <select id="reg-rubro">
           <option value="">Seleccioná tu rubro...</option>
-          <option>Kiosco</option><option>Carnicería</option><option>Verdulería</option>
-          <option>Panadería</option><option>Farmacia</option><option>Ropa</option>
-          <option>Bar/Restaurante</option><option>Ferretería</option><option>Otro</option>
+          <option>Panadería / Confitería</option><option>Fiambrería</option>
+          <option>Despensa / Almacén</option><option>Fiambrería y Despensa</option>
+          <option>Verdulería / Frutería</option><option>Carnicería</option>
+          <option>Dietética</option><option>Rotisería</option><option>Kiosco</option>
+          <option>Farmacia</option><option>Perfumería / Cosmética</option><option>Óptica</option>
+          <option>Ferretería</option><option>Corralón / Materiales de construcción</option>
+          <option>Pinturería</option><option>Ropa y accesorios</option><option>Zapatería</option>
+          <option>Electrónica / Computación</option><option>Celulares y accesorios</option>
+          <option>Librería / Papelería</option><option>Juguetería</option>
+          <option>Veterinaria</option><option>Cerrajería</option><option>Floristería</option>
+          <option>Bazar / Artículos del hogar</option><option>Inmobiliaria</option>
+          <option>Bar / Restaurante</option><option>Química / Productos químicos</option>
+          <option>Forrajería</option><option>Otro</option>
         </select>
       </div>
       <div class="auth-field"><label>Email</label><input type="email" id="reg-email" placeholder="tu@email.com"></div>
@@ -789,15 +799,19 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
           <div class="config-row"><div><div class="cr-label">Rubro</div><div class="cr-sub">Precarga productos típicos del rubro</div></div>
             <select class="config-input" id="config-rubro" onchange="onRubroChange()" style="width:auto;min-width:140px;">
               <option value="">Seleccionar...</option>
-              <option value="Kiosco">Kiosco</option>
-              <option value="Carnicería">Carnicería</option>
-              <option value="Verdulería">Verdulería</option>
-              <option value="Panadería">Panadería</option>
-              <option value="Farmacia">Farmacia</option>
-              <option value="Ropa">Ropa</option>
-              <option value="Bar/Restaurante">Bar/Restaurante</option>
-              <option value="Ferretería">Ferretería</option>
-              <option value="Otro">Otro</option>
+              <option>Panadería / Confitería</option><option>Fiambrería</option>
+              <option>Despensa / Almacén</option><option>Fiambrería y Despensa</option>
+              <option>Verdulería / Frutería</option><option>Carnicería</option>
+              <option>Dietética</option><option>Rotisería</option><option>Kiosco</option>
+              <option>Farmacia</option><option>Perfumería / Cosmética</option><option>Óptica</option>
+              <option>Ferretería</option><option>Corralón / Materiales de construcción</option>
+              <option>Pinturería</option><option>Ropa y accesorios</option><option>Zapatería</option>
+              <option>Electrónica / Computación</option><option>Celulares y accesorios</option>
+              <option>Librería / Papelería</option><option>Juguetería</option>
+              <option>Veterinaria</option><option>Cerrajería</option><option>Floristería</option>
+              <option>Bazar / Artículos del hogar</option><option>Inmobiliaria</option>
+              <option>Bar / Restaurante</option><option>Química / Productos químicos</option>
+              <option>Forrajería</option><option>Otro</option>
             </select>
           </div>
           <div class="config-row" style="justify-content:flex-end"><button class="config-save-btn" onclick="saveBizName()">Guardar</button></div>
@@ -1679,6 +1693,167 @@ function calcCosto(){
 
 // ── RUBROS ──
 var rubrosData={
+  'Panadería / Confitería':{cats:['Pan','Facturas','Tortas','Alfajores','Bebidas','Otros'],prods:[
+    {nombre:'Pan francés (kg)',cat:'Pan',precio:900},{nombre:'Pan lactal',cat:'Pan',precio:700},
+    {nombre:'Pan de campo (kg)',cat:'Pan',precio:1000},{nombre:'Medialuna',cat:'Facturas',precio:200},
+    {nombre:'Facturas (docena)',cat:'Facturas',precio:2400},{nombre:'Bizcochos (docena)',cat:'Facturas',precio:2000},
+    {nombre:'Torta (kg)',cat:'Tortas',precio:3500},{nombre:'Budín',cat:'Tortas',precio:1200},
+    {nombre:'Alfajor casero',cat:'Alfajores',precio:500},{nombre:'Tostadas',cat:'Pan',precio:500},
+  ]},
+  'Fiambrería':{cats:['Fiambres','Quesos','Embutidos','Lácteos','Otros'],prods:[
+    {nombre:'Jamón cocido (kg)',cat:'Fiambres',precio:4500},{nombre:'Paleta (kg)',cat:'Fiambres',precio:3500},
+    {nombre:'Salame (kg)',cat:'Embutidos',precio:5000},{nombre:'Chorizo colorado (kg)',cat:'Embutidos',precio:4000},
+    {nombre:'Queso cremoso (kg)',cat:'Quesos',precio:5500},{nombre:'Queso mozzarella (kg)',cat:'Quesos',precio:6000},
+    {nombre:'Queso pategrás (kg)',cat:'Quesos',precio:5000},{nombre:'Manteca (200g)',cat:'Lácteos',precio:800},
+    {nombre:'Crema de leche',cat:'Lácteos',precio:600},{nombre:'Mortadela (kg)',cat:'Fiambres',precio:3000},
+  ]},
+  'Despensa / Almacén':{cats:['Almacén','Bebidas','Lácteos','Limpieza','Otros'],prods:[
+    {nombre:'Arroz (kg)',cat:'Almacén',precio:600},{nombre:'Fideos (500g)',cat:'Almacén',precio:500},
+    {nombre:'Aceite (900ml)',cat:'Almacén',precio:2000},{nombre:'Azúcar (kg)',cat:'Almacén',precio:800},
+    {nombre:'Harina (kg)',cat:'Almacén',precio:700},{nombre:'Sal (kg)',cat:'Almacén',precio:400},
+    {nombre:'Coca-Cola 500ml',cat:'Bebidas',precio:800},{nombre:'Leche 1L',cat:'Lácteos',precio:1100},
+    {nombre:'Detergente',cat:'Limpieza',precio:900},{nombre:'Lavandina',cat:'Limpieza',precio:700},
+  ]},
+  'Fiambrería y Despensa':{cats:['Fiambres','Quesos','Almacén','Bebidas','Limpieza','Otros'],prods:[
+    {nombre:'Jamón cocido (kg)',cat:'Fiambres',precio:4500},{nombre:'Queso cremoso (kg)',cat:'Quesos',precio:5500},
+    {nombre:'Salame (kg)',cat:'Fiambres',precio:5000},{nombre:'Arroz (kg)',cat:'Almacén',precio:600},
+    {nombre:'Fideos (500g)',cat:'Almacén',precio:500},{nombre:'Aceite (900ml)',cat:'Almacén',precio:2000},
+    {nombre:'Coca-Cola 500ml',cat:'Bebidas',precio:800},{nombre:'Leche 1L',cat:'Almacén',precio:1100},
+    {nombre:'Lavandina',cat:'Limpieza',precio:700},{nombre:'Detergente',cat:'Limpieza',precio:900},
+  ]},
+  'Verdulería / Frutería':{cats:['Verduras','Frutas','Hierbas','Otros'],prods:[
+    {nombre:'Tomate (kg)',cat:'Verduras',precio:800},{nombre:'Papa (kg)',cat:'Verduras',precio:500},
+    {nombre:'Cebolla (kg)',cat:'Verduras',precio:400},{nombre:'Zanahoria (kg)',cat:'Verduras',precio:450},
+    {nombre:'Lechuga',cat:'Verduras',precio:600},{nombre:'Zapallo (kg)',cat:'Verduras',precio:350},
+    {nombre:'Manzana (kg)',cat:'Frutas',precio:700},{nombre:'Naranja (kg)',cat:'Frutas',precio:500},
+    {nombre:'Banana (kg)',cat:'Frutas',precio:600},{nombre:'Pera (kg)',cat:'Frutas',precio:800},
+    {nombre:'Mandarina (kg)',cat:'Frutas',precio:550},{nombre:'Uva (kg)',cat:'Frutas',precio:1200},
+  ]},
+  'Dietética':{cats:['Cereales','Semillas','Suplementos','Naturales','Otros'],prods:[
+    {nombre:'Avena (kg)',cat:'Cereales',precio:800},{nombre:'Granola (kg)',cat:'Cereales',precio:1500},
+    {nombre:'Chía (250g)',cat:'Semillas',precio:600},{nombre:'Lino (250g)',cat:'Semillas',precio:500},
+    {nombre:'Proteína whey',cat:'Suplementos',precio:8000},{nombre:'Colágeno (250g)',cat:'Suplementos',precio:3000},
+    {nombre:'Miel (500g)',cat:'Naturales',precio:1800},{nombre:'Stevia',cat:'Naturales',precio:600},
+    {nombre:'Té verde',cat:'Naturales',precio:800},{nombre:'Almendras (250g)',cat:'Semillas',precio:2000},
+  ]},
+  'Rotisería':{cats:['Platos','Empanadas','Ensaladas','Bebidas','Otros'],prods:[
+    {nombre:'Empanada',cat:'Empanadas',precio:500},{nombre:'Docena empanadas',cat:'Empanadas',precio:5500},
+    {nombre:'Pollo al horno (kg)',cat:'Platos',precio:4000},{nombre:'Milanesa (kg)',cat:'Platos',precio:5000},
+    {nombre:'Ensalada rusa (kg)',cat:'Ensaladas',precio:2500},{nombre:'Ensalada mixta',cat:'Ensaladas',precio:1500},
+    {nombre:'Pizza muzzarella',cat:'Platos',precio:3500},{nombre:'Tarta',cat:'Platos',precio:2500},
+    {nombre:'Coca-Cola 500ml',cat:'Bebidas',precio:800},{nombre:'Agua mineral',cat:'Bebidas',precio:400},
+  ]},
+  'Perfumería / Cosmética':{cats:['Cuidado personal','Maquillaje','Cabello','Fragancias','Otros'],prods:[
+    {nombre:'Shampoo',cat:'Cabello',precio:1500},{nombre:'Acondicionador',cat:'Cabello',precio:1400},
+    {nombre:'Crema hidratante',cat:'Cuidado personal',precio:2000},{nombre:'Jabón líquido',cat:'Cuidado personal',precio:900},
+    {nombre:'Desodorante',cat:'Cuidado personal',precio:1200},{nombre:'Base de maquillaje',cat:'Maquillaje',precio:3000},
+    {nombre:'Labial',cat:'Maquillaje',precio:1500},{nombre:'Perfume (mujer)',cat:'Fragancias',precio:8000},
+    {nombre:'Perfume (hombre)',cat:'Fragancias',precio:7000},{nombre:'Cepillo de dientes',cat:'Cuidado personal',precio:600},
+  ]},
+  'Óptica':{cats:['Anteojos','Lentes de contacto','Accesorios','Otros'],prods:[
+    {nombre:'Marco de anteojos',cat:'Anteojos',precio:15000},{nombre:'Cristales monofocales',cat:'Anteojos',precio:8000},
+    {nombre:'Lentes de sol',cat:'Anteojos',precio:10000},{nombre:'Lentes de contacto (caja)',cat:'Lentes de contacto',precio:5000},
+    {nombre:'Solución limpiadora',cat:'Lentes de contacto',precio:1500},{nombre:'Estuche de anteojos',cat:'Accesorios',precio:800},
+    {nombre:'Cadena de anteojos',cat:'Accesorios',precio:500},{nombre:'Paño limpiador',cat:'Accesorios',precio:300},
+  ]},
+  'Corralón / Materiales de construcción':{cats:['Cemento','Hierros','Cerámicas','Pintura','Plomería','Otros'],prods:[
+    {nombre:'Cemento (bolsa 50kg)',cat:'Cemento',precio:3000},{nombre:'Arena (m3)',cat:'Cemento',precio:8000},
+    {nombre:'Ladrillos (1000u)',cat:'Cemento',precio:25000},{nombre:'Hierro 8mm (barra)',cat:'Hierros',precio:2500},
+    {nombre:'Cerámico 40x40 (m2)',cat:'Cerámicas',precio:4000},{nombre:'Pintura látex (4L)',cat:'Pintura',precio:5000},
+    {nombre:'Cañería PVC 4"',cat:'Plomería',precio:1500},{nombre:'Canilla',cat:'Plomería',precio:3000},
+    {nombre:'Pegamento porcelanato',cat:'Cerámicas',precio:1200},{nombre:'Revoque (bolsa)',cat:'Cemento',precio:1500},
+  ]},
+  'Pinturería':{cats:['Pinturas','Barnices','Herramientas','Accesorios','Otros'],prods:[
+    {nombre:'Pintura látex blanca (4L)',cat:'Pinturas',precio:5000},{nombre:'Pintura esmalte (1L)',cat:'Pinturas',precio:2500},
+    {nombre:'Barniz brillante (1L)',cat:'Barnices',precio:2000},{nombre:'Sellador (4L)',cat:'Pinturas',precio:4000},
+    {nombre:'Rodillo',cat:'Herramientas',precio:800},{nombre:'Pincel ancho',cat:'Herramientas',precio:500},
+    {nombre:'Lija (pliego)',cat:'Accesorios',precio:200},{nombre:'Cinta de enmascarar',cat:'Accesorios',precio:400},
+    {nombre:'Aguarrás (1L)',cat:'Accesorios',precio:1000},{nombre:'Antihumedad (4L)',cat:'Pinturas',precio:6000},
+  ]},
+  'Ropa y accesorios':{cats:['Remeras','Pantalones','Calzado','Ropa interior','Accesorios','Otros'],prods:[
+    {nombre:'Remera básica',cat:'Remeras',precio:5000},{nombre:'Remera estampada',cat:'Remeras',precio:7000},
+    {nombre:'Pantalón de jean',cat:'Pantalones',precio:15000},{nombre:'Jogger',cat:'Pantalones',precio:8000},
+    {nombre:'Bermuda',cat:'Pantalones',precio:6000},{nombre:'Campera',cat:'Otros',precio:18000},
+    {nombre:'Buzo',cat:'Otros',precio:10000},{nombre:'Vestido',cat:'Otros',precio:9000},
+    {nombre:'Medias (pack x3)',cat:'Ropa interior',precio:1500},{nombre:'Cinturón',cat:'Accesorios',precio:3000},
+  ]},
+  'Zapatería':{cats:['Calzado mujer','Calzado hombre','Calzado niños','Accesorios','Otros'],prods:[
+    {nombre:'Zapatillas deportivas',cat:'Calzado hombre',precio:25000},{nombre:'Zapatillas mujer',cat:'Calzado mujer',precio:22000},
+    {nombre:'Zapatos de vestir',cat:'Calzado hombre',precio:18000},{nombre:'Botas mujer',cat:'Calzado mujer',precio:20000},
+    {nombre:'Ojotas',cat:'Calzado mujer',precio:4000},{nombre:'Sandalias',cat:'Calzado mujer',precio:8000},
+    {nombre:'Zapatillas niños',cat:'Calzado niños',precio:12000},{nombre:'Plantillas',cat:'Accesorios',precio:800},
+    {nombre:'Cordones',cat:'Accesorios',precio:300},{nombre:'Crema para cuero',cat:'Accesorios',precio:600},
+  ]},
+  'Electrónica / Computación':{cats:['Computación','Audio/Video','Accesorios','Cables','Otros'],prods:[
+    {nombre:'Mouse',cat:'Computación',precio:5000},{nombre:'Teclado',cat:'Computación',precio:6000},
+    {nombre:'Auriculares',cat:'Audio/Video',precio:8000},{nombre:'Parlante bluetooth',cat:'Audio/Video',precio:12000},
+    {nombre:'Cargador USB',cat:'Accesorios',precio:2000},{nombre:'Cable HDMI',cat:'Cables',precio:1500},
+    {nombre:'Pendrive 32GB',cat:'Computación',precio:3000},{nombre:'Mousepad',cat:'Computación',precio:1500},
+    {nombre:'Webcam',cat:'Computación',precio:10000},{nombre:'Hub USB',cat:'Cables',precio:3500},
+  ]},
+  'Celulares y accesorios':{cats:['Celulares','Fundas','Cargadores','Auriculares','Otros'],prods:[
+    {nombre:'Funda para celular',cat:'Fundas',precio:1500},{nombre:'Vidrio templado',cat:'Fundas',precio:800},
+    {nombre:'Cargador rápido',cat:'Cargadores',precio:3000},{nombre:'Cable USB-C',cat:'Cargadores',precio:1000},
+    {nombre:'Auriculares in-ear',cat:'Auriculares',precio:5000},{nombre:'Auriculares bluetooth',cat:'Auriculares',precio:8000},
+    {nombre:'Power bank',cat:'Cargadores',precio:6000},{nombre:'Soporte para auto',cat:'Otros',precio:1500},
+    {nombre:'Selfie stick',cat:'Otros',precio:2000},{nombre:'Cable Lightning',cat:'Cargadores',precio:1200},
+  ]},
+  'Librería / Papelería':{cats:['Útiles escolares','Papelería','Arte','Oficina','Otros'],prods:[
+    {nombre:'Cuaderno (tapa dura)',cat:'Útiles escolares',precio:800},{nombre:'Lapicera bic',cat:'Útiles escolares',precio:150},
+    {nombre:'Lápiz HB',cat:'Útiles escolares',precio:100},{nombre:'Goma de borrar',cat:'Útiles escolares',precio:200},
+    {nombre:'Tijera',cat:'Útiles escolares',precio:500},{nombre:'Resma A4',cat:'Papelería',precio:3500},
+    {nombre:'Cartulina',cat:'Papelería',precio:300},{nombre:'Marcadores (set)',cat:'Arte',precio:1200},
+    {nombre:'Crayones (set)',cat:'Arte',precio:600},{nombre:'Fibrón permanente',cat:'Oficina',precio:400},
+  ]},
+  'Juguetería':{cats:['Juguetes','Juegos de mesa','Peluches','Educativos','Otros'],prods:[
+    {nombre:'Auto de colección',cat:'Juguetes',precio:1500},{nombre:'Muñeca',cat:'Juguetes',precio:3000},
+    {nombre:'Pelota',cat:'Juguetes',precio:2000},{nombre:'Puzzle 500 piezas',cat:'Juegos de mesa',precio:2500},
+    {nombre:'Lego (caja pequeña)',cat:'Educativos',precio:5000},{nombre:'Peluche mediano',cat:'Peluches',precio:2500},
+    {nombre:'Juego de cartas',cat:'Juegos de mesa',precio:800},{nombre:'Truco',cat:'Juegos de mesa',precio:600},
+    {nombre:'Ajedrez',cat:'Juegos de mesa',precio:3000},{nombre:'Plastilina',cat:'Educativos',precio:500},
+  ]},
+  'Veterinaria':{cats:['Alimentos','Medicamentos','Accesorios','Higiene','Otros'],prods:[
+    {nombre:'Alimento perro (kg)',cat:'Alimentos',precio:1500},{nombre:'Alimento gato (kg)',cat:'Alimentos',precio:1800},
+    {nombre:'Antiparasitario perro',cat:'Medicamentos',precio:2500},{nombre:'Antiparasitario gato',cat:'Medicamentos',precio:2000},
+    {nombre:'Collar antipulgas',cat:'Higiene',precio:1500},{nombre:'Shampoo mascotas',cat:'Higiene',precio:1200},
+    {nombre:'Correa',cat:'Accesorios',precio:1500},{nombre:'Comedero',cat:'Accesorios',precio:800},
+    {nombre:'Arena para gatos (kg)',cat:'Higiene',precio:600},{nombre:'Juguete para perro',cat:'Accesorios',precio:1000},
+  ]},
+  'Cerrajería':{cats:['Candados','Llaves','Cilindros','Accesorios','Otros'],prods:[
+    {nombre:'Candado mediano',cat:'Candados',precio:2500},{nombre:'Candado grande',cat:'Candados',precio:4000},
+    {nombre:'Duplicado de llave',cat:'Llaves',precio:500},{nombre:'Llave maestra',cat:'Llaves',precio:800},
+    {nombre:'Cilindro de seguridad',cat:'Cilindros',precio:6000},{nombre:'Cerradura puerta',cat:'Cilindros',precio:5000},
+    {nombre:'Bisagras (par)',cat:'Accesorios',precio:600},{nombre:'Manija de puerta',cat:'Accesorios',precio:1500},
+    {nombre:'Cadena de seguridad',cat:'Accesorios',precio:1200},{nombre:'Pasador',cat:'Accesorios',precio:400},
+  ]},
+  'Floristería':{cats:['Flores naturales','Plantas','Arreglos','Macetas','Otros'],prods:[
+    {nombre:'Rosa (unidad)',cat:'Flores naturales',precio:500},{nombre:'Docena rosas',cat:'Flores naturales',precio:5500},
+    {nombre:'Girasol',cat:'Flores naturales',precio:400},{nombre:'Tulipán',cat:'Flores naturales',precio:600},
+    {nombre:'Arreglo floral pequeño',cat:'Arreglos',precio:3000},{nombre:'Arreglo floral grande',cat:'Arreglos',precio:8000},
+    {nombre:'Planta de interior',cat:'Plantas',precio:2000},{nombre:'Suculenta',cat:'Plantas',precio:800},
+    {nombre:'Maceta cerámica',cat:'Macetas',precio:1500},{nombre:'Tierra para macetas (kg)',cat:'Otros',precio:400},
+  ]},
+  'Bazar / Artículos del hogar':{cats:['Cocina','Vajilla','Decoración','Limpieza','Otros'],prods:[
+    {nombre:'Sartén',cat:'Cocina',precio:4000},{nombre:'Olla mediana',cat:'Cocina',precio:5000},
+    {nombre:'Taza',cat:'Vajilla',precio:800},{nombre:'Plato hondo',cat:'Vajilla',precio:600},
+    {nombre:'Vaso de vidrio',cat:'Vajilla',precio:400},{nombre:'Cubiertos (set x4)',cat:'Vajilla',precio:2000},
+    {nombre:'Cuadro decorativo',cat:'Decoración',precio:3000},{nombre:'Portarretrato',cat:'Decoración',precio:800},
+    {nombre:'Trapo de piso',cat:'Limpieza',precio:500},{nombre:'Escoba',cat:'Limpieza',precio:1200},
+  ]},
+  'Bar / Restaurante':{cats:['Bebidas','Comidas','Entradas','Postres','Otros'],prods:[
+    {nombre:'Cerveza pinta',cat:'Bebidas',precio:800},{nombre:'Cerveza porción',cat:'Bebidas',precio:500},
+    {nombre:'Coca-Cola',cat:'Bebidas',precio:600},{nombre:'Café',cat:'Bebidas',precio:500},
+    {nombre:'Café con leche',cat:'Bebidas',precio:700},{nombre:'Agua',cat:'Bebidas',precio:300},
+    {nombre:'Empanada',cat:'Entradas',precio:400},{nombre:'Hamburguesa',cat:'Comidas',precio:2500},
+    {nombre:'Pizza muzzarella',cat:'Comidas',precio:3500},{nombre:'Ensalada',cat:'Comidas',precio:1800},
+  ]},
+  'Forrajería':{cats:['Alimento animales','Semillas','Herramientas campo','Otros'],prods:[
+    {nombre:'Maíz (kg)',cat:'Alimento animales',precio:200},{nombre:'Alpiste (kg)',cat:'Alimento animales',precio:400},
+    {nombre:'Alfalfa (fardo)',cat:'Alimento animales',precio:1500},{nombre:'Pellet vacuno (kg)',cat:'Alimento animales',precio:350},
+    {nombre:'Semilla pasto (kg)',cat:'Semillas',precio:800},{nombre:'Semilla maíz (kg)',cat:'Semillas',precio:600},
+    {nombre:'Pala',cat:'Herramientas campo',precio:2500},{nombre:'Rastrillo',cat:'Herramientas campo',precio:1500},
+    {nombre:'Bolsa de arpillera',cat:'Otros',precio:200},{nombre:'Hilo sisal (rollo)',cat:'Otros',precio:600},
+  ]},
   'Kiosco':{cats:['Bebidas','Golosinas','Snacks','Cigarrillos','Lácteos','Otros'],prods:[
     {nombre:'Coca-Cola 500ml',cat:'Bebidas',precio:800},{nombre:'Pepsi 500ml',cat:'Bebidas',precio:750},
     {nombre:'Agua mineral',cat:'Bebidas',precio:400},{nombre:'Jugo Cepita',cat:'Bebidas',precio:600},
