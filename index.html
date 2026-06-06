@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --green:#0F6E56;--green-dark:#085041;--green-light:#E1F5EE;
@@ -112,6 +113,11 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .mov-time{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
 .mov-pos{font-size:13px;font-weight:500;color:var(--green);font-family:'DM Mono',monospace;}
 .mov-neg{font-size:13px;font-weight:500;color:var(--red-text);font-family:'DM Mono',monospace;}
+.chart-wrap{padding:4px 16px 16px;}
+.medio-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
+.medio-row:last-child{border-bottom:none;}
+.medio-lbl{color:var(--text2);}
+.medio-val{color:var(--green);font-family:'DM Mono',monospace;font-weight:500;}
 
 /* EMPLEADO INICIO */
 .emp-hero{background:var(--green);margin:16px 16px 0;border-radius:var(--radius);padding:20px;}
@@ -421,6 +427,15 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
         <div class="stat-card"><div class="stat-label">Este mes</div><div class="stat-val" id="dash-mes">$0</div></div>
         <div class="stat-card"><div class="stat-label">Fiados</div><div class="stat-val amber" id="dash-fiados-total">$0</div></div>
       </div>
+      <div class="stats-grid" style="padding-top:8px;">
+        <div class="stat-card"><div class="stat-label">Clientes hoy</div><div class="stat-val" id="dash-cli-hoy">0</div></div>
+        <div class="stat-card"><div class="stat-label">Clientes semana</div><div class="stat-val" id="dash-cli-sem">0</div></div>
+        <div class="stat-card"><div class="stat-label">Clientes mes</div><div class="stat-val" id="dash-cli-mes">0</div></div>
+      </div>
+      <div class="chart-wrap">
+        <div class="section-title" style="margin:12px 0 8px;padding:0;">Ventas últimos 7 días</div>
+        <canvas id="ventas-chart"></canvas>
+      </div>
       <div class="action-row">
         <button class="btn-venta" onclick="showPage('cargar','venta')"><i class="ti ti-plus"></i> Cargar venta</button>
         <button class="btn-gasto" onclick="showPage('cargar','gasto')"><i class="ti ti-minus"></i> Cargar gasto</button>
@@ -656,6 +671,8 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 var currentRole='owner';
 var state={
   ventas:0,gastosTotales:0,semana:0,mes:0,movimientos:[],
+  clientesHoy:0,clientesSemana:0,clientesMes:0,
+  ventasPorMedio:{},historialVentas:[],
   bizName:'Kiosco Don José',
   categorias:['Bebidas','Golosinas','Snacks','Limpieza','Lácteos','Panadería','Cigarrillos','Otros'],
   productos:[
@@ -676,7 +693,7 @@ var state={
 };
 
 var cierreRaw='',cierreGastos=[],cargarRaw='',cargarTipo='venta',selectedCat='';
-var voiceListening=false,recognition=null;
+var voiceListening=false,recognition=null,ventasChart=null;
 
 // ── UTILS ──
 function fmt(n){return '$'+Math.round(n).toLocaleString('es-AR');}
@@ -804,16 +821,42 @@ function updateDashboard(){
   var fp=state.fiados.filter(function(p){return p.deudas.length>0;}).length;
   document.getElementById('dash-fiados-total').textContent=fmt(ft);
   document.getElementById('dash-fiados-banner').textContent=fmt(ft)+' · '+fp+' personas';
+  document.getElementById('dash-cli-hoy').textContent=state.clientesHoy;
+  document.getElementById('dash-cli-sem').textContent=state.clientesSemana;
+  document.getElementById('dash-cli-mes').textContent=state.clientesMes;
   var list=document.getElementById('movs-list');
-  if(!state.movimientos.length){list.innerHTML='<div style="padding:16px 0;text-align:center;font-size:13px;color:var(--text3)">Todavía no hay movimientos hoy</div>';return;}
-  list.innerHTML='';
-  state.movimientos.slice().reverse().slice(0,6).forEach(function(m){
-    var el=document.createElement('div');el.className='mov-item';
-    el.innerHTML='<div><div class="mov-desc">'+(m.desc||m.tipo)+'</div>'
-      +(m.cat?'<div class="mov-cat">'+m.cat+'</div>':'')
-      +'<div class="mov-time">'+m.hora+'</div></div>'
-      +'<div class="'+(m.tipo==='venta'?'mov-pos':'mov-neg')+'">'+(m.tipo==='venta'?'+':'-')+fmt(m.monto)+'</div>';
-    list.appendChild(el);
+  if(!state.movimientos.length){list.innerHTML='<div style="padding:16px 0;text-align:center;font-size:13px;color:var(--text3)">Todavía no hay movimientos hoy</div>';}
+  else{
+    list.innerHTML='';
+    state.movimientos.slice().reverse().slice(0,6).forEach(function(m){
+      var el=document.createElement('div');el.className='mov-item';
+      el.innerHTML='<div><div class="mov-desc">'+(m.desc||m.tipo)+'</div>'
+        +(m.cat?'<div class="mov-cat">'+m.cat+(m.medio?' · '+m.medio:'')+'</div>':'')
+        +'<div class="mov-time">'+m.hora+'</div></div>'
+        +'<div class="'+(m.tipo==='venta'?'mov-pos':'mov-neg')+'">'+(m.tipo==='venta'?'+':'-')+fmt(m.monto)+'</div>';
+      list.appendChild(el);
+    });
+  }
+  renderChart();
+}
+function renderChart(){
+  var canvas=document.getElementById('ventas-chart');
+  if(!canvas)return;
+  var dias=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  var labels=[],data=[];
+  var hist=state.historialVentas.slice(-6);
+  hist.forEach(function(h){labels.push(h.fecha);data.push(h.ventas);});
+  labels.push(dias[new Date().getDay()]);
+  data.push(state.ventas);
+  while(labels.length<7){labels.unshift('');data.unshift(0);}
+  var isDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;
+  var gridColor=isDark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.06)';
+  var tickColor=isDark?'#5A5A56':'#A8A8A4';
+  if(ventasChart){ventasChart.destroy();ventasChart=null;}
+  ventasChart=new Chart(canvas.getContext('2d'),{
+    type:'line',
+    data:{labels:labels,datasets:[{data:data,borderColor:'#0F6E56',backgroundColor:'rgba(15,110,86,0.12)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#0F6E56',fill:true,tension:0.4}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return fmt(c.parsed.y);}}}},scales:{y:{beginAtZero:true,grid:{color:gridColor},ticks:{color:tickColor,font:{size:10},callback:function(v){return '$'+Math.round(v/1000)+'k';}}},x:{grid:{display:false},ticks:{color:tickColor,font:{size:11}}}}}
   });
 }
 
@@ -946,7 +989,13 @@ function confirmarCargar(){
   if(!existe&&desc&&desc!=='Venta'&&desc!=='Gasto'){
     state.productos.push({nombre:desc,categoria:cat,precio:monto});
   }
-  if(cargarTipo==='venta')state.ventas+=monto;else state.gastosTotales+=monto;
+  if(cargarTipo==='venta'){
+    state.ventas+=monto;
+    state.clientesHoy++;state.clientesSemana++;state.clientesMes++;
+    state.ventasPorMedio[medio]=(state.ventasPorMedio[medio]||0)+monto;
+  } else {
+    state.gastosTotales+=monto;
+  }
   state.movimientos.push({tipo:cargarTipo,monto:monto,desc:desc,cat:cat,hora:hora,medio:medio||null});
   showToast(cargarTipo==='venta'?'✓ Venta cargada · '+medio:'✓ Gasto cargado · '+cat);
   cargarRaw='';selectedCat='';
@@ -1085,19 +1134,35 @@ function renderGastosAdded(){
 }
 function removeGasto(i){cierreGastos.splice(i,1);renderGastosAdded();}
 function buildResumen(){
-  var v=cierreRaw?parseInt(cierreRaw,10):0;
+  var v=state.ventas;
+  cierreRaw=String(v);
+  document.getElementById('c-val1').textContent=fmt(v);
+  document.getElementById('c-val3').textContent=fmt(v);
   var tg=cierreGastos.reduce(function(a,g){return a+g.monto;},0);
   document.getElementById('res-ganancia').textContent=fmt(v-tg);
   var rows=document.getElementById('res-rows');rows.innerHTML='';
   function addRow(l,val,cls){var r=document.createElement('div');r.className='res-row';r.innerHTML='<span class="res-lbl">'+l+'</span><span class="'+cls+'">'+val+'</span>';rows.appendChild(r);}
   addRow('Total ventas',fmt(v),'res-pos');
+  var medios=['Efectivo','Tarjeta de Débito','Tarjeta de Crédito','Transferencia','Cuenta Corriente (Fiado)'];
+  medios.forEach(function(m){
+    var amt=state.ventasPorMedio[m]||0;
+    if(amt>0){
+      var div=document.createElement('div');div.className='medio-row';
+      div.innerHTML='<span class="medio-lbl">↳ '+m+'</span><span class="medio-val">'+fmt(amt)+'</span>';
+      rows.appendChild(div);
+    }
+  });
   cierreGastos.forEach(function(g){addRow(g.desc,'-'+fmt(g.monto),'res-neg');});
   addRow('Total gastos','-'+fmt(tg),'res-neg');
 }
 function confirmarCierre(){
-  var v=cierreRaw?parseInt(cierreRaw,10):0;
+  var v=state.ventas;
   var tg=cierreGastos.reduce(function(a,g){return a+g.monto;},0);
-  state.ventas=v;state.gastosTotales=tg;
+  state.historialVentas.push({fecha:todayShort(),ventas:v});
+  if(state.historialVentas.length>7)state.historialVentas.shift();
+  state.semana+=v-tg;state.mes+=v-tg;
+  state.ventas=0;state.gastosTotales=0;
+  state.clientesHoy=0;state.ventasPorMedio={};state.movimientos=[];
   document.getElementById('result-fecha').textContent='Caja cerrada';
   document.getElementById('result-ganancia').textContent=fmt(v-tg);
   document.getElementById('result-pill-v').textContent='Ventas '+fmt(v);
