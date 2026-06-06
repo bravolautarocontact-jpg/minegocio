@@ -8,6 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
 :root{
   --green:#0F6E56;--green-dark:#085041;--green-light:#E1F5EE;
@@ -32,6 +35,27 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;}
 
+/* AUTH SCREEN */
+.auth-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:var(--bg);}
+.auth-logo{font-size:22px;font-weight:500;color:var(--green);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.auth-logo i{font-size:26px;}
+.auth-sub{font-size:13px;color:var(--text2);margin-bottom:12px;}
+.auth-badge{background:var(--green-light);color:var(--green);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;margin-bottom:24px;}
+.auth-box{width:100%;max-width:380px;}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface2);border-radius:var(--radius);padding:4px;gap:4px;margin-bottom:20px;}
+.auth-tab{padding:9px;border-radius:8px;border:none;background:none;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text2);transition:all .12s;}
+.auth-tab.active{background:var(--green);color:white;}
+.auth-field{margin-bottom:12px;}
+.auth-field label{display:block;font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
+.auth-field input,.auth-field select{width:100%;padding:11px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .12s;}
+.auth-field input:focus,.auth-field select:focus{border-color:var(--green);}
+.auth-btn{width:100%;padding:13px;border-radius:var(--radius-sm);border:none;background:var(--green);color:white;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;transition:background .12s;}
+.auth-btn:hover{background:var(--green-dark);}
+.auth-divider{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--text3);font-size:12px;}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:0.5px;background:var(--border-med);}
+.auth-google{width:100%;padding:11px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .12s;}
+.auth-google:hover{background:var(--surface2);}
+.auth-error{background:var(--red);color:var(--red-text);border-radius:var(--radius-sm);padding:9px 12px;font-size:13px;margin-bottom:12px;display:none;}
 /* SELECT SCREEN */
 .select-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 .ss-logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:500;color:var(--green);margin-bottom:8px;}
@@ -427,7 +451,48 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 <body>
 
 <!-- SELECCIÓN DE PERFIL -->
-<div class="select-screen" id="select-screen">
+<!-- AUTH SCREEN -->
+<div class="auth-screen" id="auth-screen">
+  <div class="auth-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
+  <div class="auth-sub">Ingresá o creá tu cuenta gratis</div>
+  <div class="auth-badge">✨ 14 días gratis — Sin tarjeta, sin compromiso</div>
+  <div class="auth-box">
+    <div class="auth-tabs">
+      <button class="auth-tab" id="atab-login" onclick="switchAuthTab('login')">Iniciar sesión</button>
+      <button class="auth-tab active" id="atab-register" onclick="switchAuthTab('register')">Registrarse</button>
+    </div>
+    <div id="auth-error" class="auth-error"></div>
+    <!-- REGISTER -->
+    <div id="auth-panel-register">
+      <div class="auth-field"><label>Nombre del comercio</label><input type="text" id="reg-biz" placeholder="Almacén Don Juan"></div>
+      <div class="auth-field"><label>Rubro</label>
+        <select id="reg-rubro">
+          <option value="">Seleccioná tu rubro...</option>
+          <option>Kiosco</option><option>Carnicería</option><option>Verdulería</option>
+          <option>Panadería</option><option>Farmacia</option><option>Ropa</option>
+          <option>Bar/Restaurante</option><option>Ferretería</option><option>Otro</option>
+        </select>
+      </div>
+      <div class="auth-field"><label>Email</label><input type="email" id="reg-email" placeholder="tu@email.com"></div>
+      <div class="auth-field"><label>Contraseña</label><input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres"></div>
+      <button class="auth-btn" onclick="doRegister()">Crear cuenta gratis</button>
+    </div>
+    <!-- LOGIN -->
+    <div id="auth-panel-login" style="display:none">
+      <div class="auth-field"><label>Email</label><input type="email" id="log-email" placeholder="tu@email.com"></div>
+      <div class="auth-field"><label>Contraseña</label><input type="password" id="log-pass" placeholder="Tu contraseña"></div>
+      <button class="auth-btn" onclick="doLogin()">Ingresar</button>
+    </div>
+    <div class="auth-divider">o</div>
+    <button class="auth-google" onclick="doGoogle()">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continuar con Google
+    </button>
+  </div>
+</div>
+
+<!-- SELECT SCREEN (rol) -->
+<div class="select-screen" id="select-screen" style="display:none">
   <div class="ss-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
   <div class="ss-biz" id="ss-biz-name">Kiosco Don José</div>
   <div class="ss-title">¿Quién está usando la app?</div>
@@ -443,6 +508,7 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
       <div class="sc-desc">Ventas, gastos y fiados</div>
     </div>
   </div>
+  <button style="margin-top:20px;background:none;border:none;color:var(--text3);font-size:12px;cursor:pointer;" onclick="doLogout()"><i class="ti ti-logout"></i> Cerrar sesión</button>
 </div>
 
 <!-- APP -->
@@ -1136,6 +1202,7 @@ function confirmarCargar(){
   }
   state.movimientos.push({tipo:cargarTipo,monto:monto,desc:desc,cat:cat,hora:hora,medio:medio||null});
   showToast(cargarTipo==='venta'?'✓ Venta cargada · '+medio:'✓ Gasto cargado · '+cat);
+  if(currentUid)saveState();
   cargarRaw='';selectedCat='';
   document.getElementById('cargar-val').textContent='$0';
   document.getElementById('cargar-desc').value='';
@@ -1308,6 +1375,7 @@ function confirmarCierre(){
   ['cierre-s1','cierre-s2','cierre-s3'].forEach(function(id){document.getElementById(id).style.display='none';});
   document.getElementById('cierre-result').style.display='block';
   document.getElementById('cierre-fill').style.width='100%';
+  if(currentUid)saveState();
 }
 function cierreReset(){cierreRaw='';cierreGastos=[];document.getElementById('c-val1').textContent='$0';renderGastosAdded();showPage('inicio');}
 
@@ -1461,6 +1529,119 @@ function saveBizName(){
   ['biz-name-desk','biz-name-mob','ss-biz-name'].forEach(function(id){document.getElementById(id).textContent=name;});
   showToast('Nombre guardado');
 }
+// ── FIREBASE ──
+var firebaseConfig={
+  apiKey:"AIzaSyByuuAuJTBXiTL9sLOJW37ckxAOeOMXqbk",
+  authDomain:"minegocio-4c5ee.firebaseapp.com",
+  projectId:"minegocio-4c5ee",
+  storageBucket:"minegocio-4c5ee.firebasestorage.app",
+  messagingSenderId:"696301307111",
+  appId:"1:696301307111:web:f4a6bdce376b0f9dfcce42"
+};
+firebase.initializeApp(firebaseConfig);
+var auth=firebase.auth();
+var db=firebase.firestore();
+var currentUid=null;
+
+function showAuthScreen(){
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('select-screen').style.display='none';
+  document.getElementById('app').style.display='none';
+}
+function showSelectScreen(){
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('select-screen').style.display='flex';
+  document.getElementById('app').style.display='none';
+}
+function switchAuthTab(tab){
+  document.getElementById('atab-login').className='auth-tab'+(tab==='login'?' active':'');
+  document.getElementById('atab-register').className='auth-tab'+(tab==='register'?' active':'');
+  document.getElementById('auth-panel-login').style.display=tab==='login'?'block':'none';
+  document.getElementById('auth-panel-register').style.display=tab==='register'?'block':'none';
+  document.getElementById('auth-error').style.display='none';
+}
+function showAuthError(msg){
+  var el=document.getElementById('auth-error');
+  el.textContent=msg;el.style.display='block';
+}
+function doRegister(){
+  var biz=document.getElementById('reg-biz').value.trim();
+  var rubro=document.getElementById('reg-rubro').value;
+  var email=document.getElementById('reg-email').value.trim();
+  var pass=document.getElementById('reg-pass').value;
+  if(!biz){showAuthError('Ingresá el nombre del comercio');return;}
+  if(!email||!pass){showAuthError('Ingresá email y contraseña');return;}
+  auth.createUserWithEmailAndPassword(email,pass).then(function(cred){
+    state.bizName=biz;state.rubro=rubro;
+    if(rubro&&rubrosData[rubro]){
+      state.categorias=rubrosData[rubro].cats.concat(['Otros']);
+      state.productos=rubrosData[rubro].prods.map(function(p){return{nombre:p.nombre,categoria:p.cat,precio:p.precio};});
+    }
+    return saveState(cred.user.uid);
+  }).then(function(){
+    document.getElementById('ss-biz-name').textContent=state.bizName;
+    showSelectScreen();
+  }).catch(function(e){showAuthError(authError(e.code));});
+}
+function doLogin(){
+  var email=document.getElementById('log-email').value.trim();
+  var pass=document.getElementById('log-pass').value;
+  if(!email||!pass){showAuthError('Ingresá email y contraseña');return;}
+  auth.signInWithEmailAndPassword(email,pass).catch(function(e){showAuthError(authError(e.code));});
+}
+function doGoogle(){
+  var provider=new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider).catch(function(e){showAuthError(authError(e.code));});
+}
+function doLogout(){
+  auth.signOut();
+}
+function authError(code){
+  var msgs={'auth/email-already-in-use':'Ese email ya está registrado','auth/invalid-email':'Email inválido','auth/wrong-password':'Contraseña incorrecta','auth/user-not-found':'No existe una cuenta con ese email','auth/weak-password':'La contraseña debe tener al menos 6 caracteres','auth/popup-closed-by-user':'Cerraste la ventana de Google'};
+  return msgs[code]||'Error: '+code;
+}
+function saveState(uid){
+  return db.collection('negocios').doc(uid||currentUid).set({
+    bizName:state.bizName,rubro:state.rubro,
+    ventas:state.ventas,gastosTotales:state.gastosTotales,
+    semana:state.semana,mes:state.mes,
+    clientesHoy:state.clientesHoy,clientesSemana:state.clientesSemana,clientesMes:state.clientesMes,
+    ventasPorMedio:state.ventasPorMedio,historialVentas:state.historialVentas,
+    movimientos:state.movimientos,productos:state.productos,
+    categorias:state.categorias,fiados:state.fiados
+  });
+}
+function loadState(uid){
+  return db.collection('negocios').doc(uid).get().then(function(doc){
+    if(doc.exists){
+      var d=doc.data();
+      state.bizName=d.bizName||state.bizName;
+      state.rubro=d.rubro||'';
+      state.ventas=d.ventas||0;state.gastosTotales=d.gastosTotales||0;
+      state.semana=d.semana||0;state.mes=d.mes||0;
+      state.clientesHoy=d.clientesHoy||0;state.clientesSemana=d.clientesSemana||0;state.clientesMes=d.clientesMes||0;
+      state.ventasPorMedio=d.ventasPorMedio||{};state.historialVentas=d.historialVentas||[];
+      state.movimientos=d.movimientos||[];
+      if(d.productos&&d.productos.length)state.productos=d.productos;
+      if(d.categorias&&d.categorias.length)state.categorias=d.categorias;
+      if(d.fiados&&d.fiados.length)state.fiados=d.fiados;
+    }
+  });
+}
+
+auth.onAuthStateChanged(function(user){
+  if(user){
+    currentUid=user.uid;
+    loadState(user.uid).then(function(){
+      document.getElementById('ss-biz-name').textContent=state.bizName;
+      showSelectScreen();
+    });
+  } else {
+    currentUid=null;
+    showAuthScreen();
+  }
+});
+
 (function(){document.getElementById('date-desk').textContent=today();cierreStep(1);})();
 
 // ── CALC TABS ──
