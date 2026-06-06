@@ -303,6 +303,61 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 .ck.equals{background:var(--green);color:var(--green-light);}
 .ck.span2{grid-column:span 2;}
 
+/* CALC TABS */
+.calc-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:0.5px solid var(--border);background:var(--surface);}
+.calc-tab{padding:11px 8px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;border-bottom:2px solid transparent;transition:color .12s,border-color .12s;}
+.calc-tab.active{color:var(--green);border-bottom-color:var(--green);}
+.calc-panel{display:none;flex:1;overflow-y:auto;}
+.calc-panel.active{display:block;}
+/* PRICE CALC */
+.pc-wrap{padding:16px;}
+.pc-subtabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px;}
+.pc-stab{padding:10px;border-radius:var(--radius-sm);border:0.5px solid var(--border-med);background:var(--surface2);font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text2);transition:all .12s;text-align:center;}
+.pc-stab.active{background:var(--green-light);color:var(--green);border-color:var(--green-mid);}
+.pc-field{margin-bottom:12px;}
+.pc-field label{display:block;font-size:11px;color:var(--text3);margin-bottom:4px;}
+.pc-field input{width:100%;padding:10px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-family:'DM Mono',monospace;font-size:16px;}
+.pc-result-box{background:var(--surface2);border-radius:var(--radius);padding:14px 16px;margin-top:4px;}
+.pc-result-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:0.5px solid var(--border);}
+.pc-result-row:last-child{border-bottom:none;font-weight:500;font-size:15px;}
+.pc-result-lbl{color:var(--text2);}
+.pc-result-val{font-family:'DM Mono',monospace;}
+.pc-result-val.green{color:var(--green);}
+.pc-result-val.blue{color:var(--blue-text);}
+.pc-info{background:var(--blue);border-radius:var(--radius-sm);padding:10px 12px;font-size:12px;color:var(--blue-text);margin-bottom:12px;line-height:1.5;}
+/* PRODUCTOS PAGE */
+.prod-page-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border);}
+.prod-page-title{font-size:18px;font-weight:500;color:var(--text);}
+.prod-page-actions{display:flex;gap:8px;}
+.prod-search-bar{padding:10px 16px;border-bottom:0.5px solid var(--border);}
+.prod-search-bar input{width:100%;padding:9px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;}
+.prod-filters{padding:8px 16px;display:flex;gap:8px;overflow-x:auto;border-bottom:0.5px solid var(--border);}
+.prod-filter-chip{padding:5px 12px;border-radius:20px;border:0.5px solid var(--border-med);background:var(--surface2);font-size:12px;color:var(--text2);cursor:pointer;white-space:nowrap;transition:all .12s;}
+.prod-filter-chip.active{background:var(--green-light);color:var(--green);border-color:var(--green-mid);}
+.prod-list-wrap{flex:1;overflow-y:auto;}
+.prod-item{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:0.5px solid var(--border);}
+.prod-item-left{flex:1;}
+.prod-item-name{font-size:14px;font-weight:500;color:var(--text);}
+.prod-item-cat{font-size:11px;color:var(--text3);margin-top:2px;}
+.prod-item-price{font-size:15px;font-weight:500;color:var(--green);font-family:'DM Mono',monospace;margin-right:12px;}
+.prod-item-actions{display:flex;gap:6px;}
+.prod-btn{background:none;border:0.5px solid var(--border-med);border-radius:6px;padding:5px 8px;font-size:12px;cursor:pointer;color:var(--text2);transition:all .12s;}
+.prod-btn:hover{background:var(--surface2);}
+.prod-btn.del:hover{color:var(--red-text);border-color:var(--red-text);}
+.prod-empty{padding:40px 16px;text-align:center;font-size:13px;color:var(--text3);}
+/* PRODUCT MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border-radius:var(--radius);padding:20px;width:100%;max-width:400px;}
+.modal-title{font-size:16px;font-weight:500;margin-bottom:16px;}
+.modal-field{margin-bottom:12px;}
+.modal-field label{display:block;font-size:11px;color:var(--text3);margin-bottom:4px;}
+.modal-field input,.modal-field select{width:100%;padding:10px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface2);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+.modal-btn{padding:9px 18px;border-radius:var(--radius-sm);border:none;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.modal-btn.primary{background:var(--green);color:var(--green-light);}
+.modal-btn.cancel{background:var(--surface2);color:var(--text2);border:0.5px solid var(--border-med);}
+
 /* CONFIG */
 .config-section{padding:16px 16px 0;}
 .config-section-title{font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}
@@ -578,33 +633,84 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
     </div>
 
     <!-- CALCULADORA -->
-    <div class="page" id="page-calc">
+    <div class="page" id="page-calc" style="display:none;flex-direction:column;">
       <div class="page-header">
         <button class="ph-back" onclick="backFromCalc()"><i class="ti ti-arrow-left"></i></button>
         <div class="ph-title">Calculadora</div>
       </div>
-      <div class="calc-wrap">
-        <div class="calc-display">
-          <div class="calc-expr" id="calc-expr"></div>
-          <div class="calc-result" id="calc-result">0</div>
-        </div>
-        <div class="calc-kb-hint"><i class="ti ti-keyboard" style="font-size:13px"></i> También podés usar el teclado de la compu</div>
-        <div class="calc-grid">
-          <button class="ck action" id="ck-ac" onclick="calcAC()">AC</button>
-          <button class="ck action" onclick="calcSign()">+/-</button>
-          <button class="ck action" onclick="calcPct()">%</button>
-          <button class="ck op" id="ck-div" onclick="calcOp('/')">÷</button>
-          <button class="ck" id="ck-7" onclick="calcNum('7')">7</button><button class="ck" id="ck-8" onclick="calcNum('8')">8</button><button class="ck" id="ck-9" onclick="calcNum('9')">9</button>
-          <button class="ck op" id="ck-mul" onclick="calcOp('*')">×</button>
-          <button class="ck" id="ck-4" onclick="calcNum('4')">4</button><button class="ck" id="ck-5" onclick="calcNum('5')">5</button><button class="ck" id="ck-6" onclick="calcNum('6')">6</button>
-          <button class="ck op" id="ck-sub" onclick="calcOp('-')">−</button>
-          <button class="ck" id="ck-1" onclick="calcNum('1')">1</button><button class="ck" id="ck-2" onclick="calcNum('2')">2</button><button class="ck" id="ck-3" onclick="calcNum('3')">3</button>
-          <button class="ck op" id="ck-add" onclick="calcOp('+')">+</button>
-          <button class="ck span2" id="ck-0" onclick="calcNum('0')">0</button>
-          <button class="ck" id="ck-dot" onclick="calcDot()">.</button>
-          <button class="ck equals" id="ck-eq" onclick="calcEquals()">=</button>
+      <div class="calc-tabs">
+        <button class="calc-tab active" id="ctab-basica" onclick="switchCalcTab('basica')">Básica</button>
+        <button class="calc-tab" id="ctab-precios" onclick="switchCalcTab('precios')">Precios</button>
+      </div>
+      <div class="calc-panel active" id="cpanel-basica">
+        <div class="calc-wrap">
+          <div class="calc-display">
+            <div class="calc-expr" id="calc-expr"></div>
+            <div class="calc-result" id="calc-result">0</div>
+          </div>
+          <div class="calc-kb-hint"><i class="ti ti-keyboard" style="font-size:13px"></i> También podés usar el teclado de la compu</div>
+          <div class="calc-grid">
+            <button class="ck action" id="ck-ac" onclick="calcAC()">AC</button>
+            <button class="ck action" onclick="calcSign()">+/-</button>
+            <button class="ck action" onclick="calcPct()">%</button>
+            <button class="ck op" id="ck-div" onclick="calcOp('/')">÷</button>
+            <button class="ck" id="ck-7" onclick="calcNum('7')">7</button><button class="ck" id="ck-8" onclick="calcNum('8')">8</button><button class="ck" id="ck-9" onclick="calcNum('9')">9</button>
+            <button class="ck op" id="ck-mul" onclick="calcOp('*')">×</button>
+            <button class="ck" id="ck-4" onclick="calcNum('4')">4</button><button class="ck" id="ck-5" onclick="calcNum('5')">5</button><button class="ck" id="ck-6" onclick="calcNum('6')">6</button>
+            <button class="ck op" id="ck-sub" onclick="calcOp('-')">−</button>
+            <button class="ck" id="ck-1" onclick="calcNum('1')">1</button><button class="ck" id="ck-2" onclick="calcNum('2')">2</button><button class="ck" id="ck-3" onclick="calcNum('3')">3</button>
+            <button class="ck op" id="ck-add" onclick="calcOp('+')">+</button>
+            <button class="ck span2" id="ck-0" onclick="calcNum('0')">0</button>
+            <button class="ck" id="ck-dot" onclick="calcDot()">.</button>
+            <button class="ck equals" id="ck-eq" onclick="calcEquals()">=</button>
+          </div>
         </div>
       </div>
+      <div class="calc-panel" id="cpanel-precios">
+        <div class="pc-wrap">
+          <div class="pc-subtabs">
+            <button class="pc-stab active" id="pstab-cv" onclick="switchPcTab('cv')">Costo → Venta</button>
+            <button class="pc-stab" id="pstab-vc" onclick="switchPcTab('vc')">Venta → Costo</button>
+          </div>
+          <div id="pc-panel-cv">
+            <div class="pc-info"><i class="ti ti-info-circle"></i> Ingresá el costo y el margen de ganancia deseado. Te calcula el precio de venta.</div>
+            <div class="pc-field"><label>Precio de Costo ($)</label><input type="number" id="pc-costo" placeholder="0.00" oninput="calcPrecio()"></div>
+            <div class="pc-field"><label>Margen de Ganancia (%)</label><input type="number" id="pc-margen" placeholder="0" oninput="calcPrecio()"></div>
+            <div class="pc-result-box">
+              <div class="pc-result-row"><span class="pc-result-lbl">Costo</span><span class="pc-result-val" id="pc-r-costo">$0</span></div>
+              <div class="pc-result-row"><span class="pc-result-lbl">Margen</span><span class="pc-result-val" id="pc-r-margen">0%</span></div>
+              <div class="pc-result-row"><span class="pc-result-lbl">Ganancia</span><span class="pc-result-val green" id="pc-r-ganancia">$0</span></div>
+              <div class="pc-result-row"><span class="pc-result-lbl">Precio de Venta</span><span class="pc-result-val blue" id="pc-r-venta">$0</span></div>
+            </div>
+          </div>
+          <div id="pc-panel-vc" style="display:none">
+            <div class="pc-info"><i class="ti ti-info-circle"></i> Ingresá el precio de venta y el margen. Te calcula cuánto te costó.</div>
+            <div class="pc-field"><label>Precio de Venta ($)</label><input type="number" id="pc-venta2" placeholder="0.00" oninput="calcCosto()"></div>
+            <div class="pc-field"><label>Margen de Ganancia (%)</label><input type="number" id="pc-margen2" placeholder="0" oninput="calcCosto()"></div>
+            <div class="pc-result-box">
+              <div class="pc-result-row"><span class="pc-result-lbl">Precio de Venta</span><span class="pc-result-val" id="pc-r-venta2">$0</span></div>
+              <div class="pc-result-row"><span class="pc-result-lbl">Margen</span><span class="pc-result-val" id="pc-r-margen2">0%</span></div>
+              <div class="pc-result-row"><span class="pc-result-lbl">Ganancia</span><span class="pc-result-val green" id="pc-r-ganancia2">$0</span></div>
+              <div class="pc-result-row"><span class="pc-result-lbl">Costo</span><span class="pc-result-val blue" id="pc-r-costo2">$0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="page pb" id="page-productos">
+      <div class="prod-page-header">
+        <div class="prod-page-title">Productos</div>
+        <div class="prod-page-actions">
+          <button class="btn-gasto" style="padding:8px 12px;font-size:12px;" onclick="openProdModal()"><i class="ti ti-plus"></i> Agregar</button>
+        </div>
+      </div>
+      <div class="prod-search-bar">
+        <input type="text" id="prod-search" placeholder="Buscar por nombre..." oninput="renderProductos()">
+      </div>
+      <div class="prod-filters" id="prod-filter-cats"></div>
+      <div class="prod-list-wrap" id="prod-list-page"></div>
     </div>
 
     <!-- CONFIG -->
@@ -614,6 +720,20 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
         <div class="config-section-title">Mi negocio</div>
         <div class="config-card">
           <div class="config-row"><div><div class="cr-label">Nombre del negocio</div></div><input class="config-input" id="config-biz-name" type="text" value="Kiosco Don José"></div>
+          <div class="config-row"><div><div class="cr-label">Rubro</div><div class="cr-sub">Precarga productos típicos del rubro</div></div>
+            <select class="config-input" id="config-rubro" onchange="onRubroChange()" style="width:auto;min-width:140px;">
+              <option value="">Seleccionar...</option>
+              <option value="Kiosco">Kiosco</option>
+              <option value="Carnicería">Carnicería</option>
+              <option value="Verdulería">Verdulería</option>
+              <option value="Panadería">Panadería</option>
+              <option value="Farmacia">Farmacia</option>
+              <option value="Ropa">Ropa</option>
+              <option value="Bar/Restaurante">Bar/Restaurante</option>
+              <option value="Ferretería">Ferretería</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
           <div class="config-row" style="justify-content:flex-end"><button class="config-save-btn" onclick="saveBizName()">Guardar</button></div>
         </div>
       </div>
@@ -666,6 +786,20 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 
 <div class="toast" id="toast"></div>
 
+<!-- MODAL PRODUCTO -->
+<div class="modal-overlay" id="prod-modal">
+  <div class="modal">
+    <div class="modal-title" id="prod-modal-title">Agregar producto</div>
+    <div class="modal-field"><label>Nombre</label><input type="text" id="pm-nombre" placeholder="Ej: Coca-Cola 500ml"></div>
+    <div class="modal-field"><label>Categoría</label><select id="pm-cat"></select></div>
+    <div class="modal-field"><label>Precio ($)</label><input type="number" id="pm-precio" placeholder="0"></div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" onclick="closeProdModal()">Cancelar</button>
+      <button class="modal-btn primary" onclick="saveProdModal()">Guardar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── STATE ──
 var currentRole='owner';
@@ -673,6 +807,7 @@ var state={
   ventas:0,gastosTotales:0,semana:0,mes:0,movimientos:[],
   clientesHoy:0,clientesSemana:0,clientesMes:0,
   ventasPorMedio:{},historialVentas:[],
+  rubro:'',
   bizName:'Kiosco Don José',
   categorias:['Bebidas','Golosinas','Snacks','Limpieza','Lácteos','Panadería','Cigarrillos','Otros'],
   productos:[
@@ -760,6 +895,7 @@ function buildNav(){
     {icon:'ti-lock',label:'Cerrar caja',page:'cierre'},
     {icon:'ti-users',label:'Fiados',page:'fiados'},
     {icon:'ti-calculator',label:'Calculadora',page:'calc'},
+    {icon:'ti-package',label:'Productos',page:'productos'},
     {icon:'ti-settings',label:'Configuración',page:'config'},
   ];
   var empItems=[
@@ -795,7 +931,7 @@ function showPage(page,sub){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
   document.querySelectorAll('.mob-nav-item').forEach(function(n){n.classList.remove('active');});
-  var map={'inicio':'page-inicio','emp-inicio':'page-emp-inicio','cargar':'page-cargar','cierre':'page-cierre','fiados':'page-fiados','calc':'page-calc','config':'page-config'};
+  var map={'inicio':'page-inicio','emp-inicio':'page-emp-inicio','cargar':'page-cargar','cierre':'page-cierre','fiados':'page-fiados','calc':'page-calc','config':'page-config','productos':'page-productos'};
   var el=document.getElementById(map[page]);if(el)el.classList.add('active');
   document.querySelectorAll('.nav-item[data-page="'+page+'"]').forEach(function(n){n.classList.add('active');});
   var mn=document.getElementById('mn-'+page);if(mn)mn.classList.add('active');
@@ -804,6 +940,8 @@ function showPage(page,sub){
   if(page==='fiados')renderFiados();
   if(page==='config')renderConfig();
   if(page==='calc')calcFocused=true; else calcFocused=false;
+  if(page==='productos')renderProductos();
+  if(page==='config')renderConfig();
   document.getElementById('main').scrollTop=0;
 }
 function backFromCargar(){showPage(currentRole==='owner'?'inicio':'emp-inicio');}
@@ -1324,6 +1462,188 @@ function saveBizName(){
   showToast('Nombre guardado');
 }
 (function(){document.getElementById('date-desk').textContent=today();cierreStep(1);})();
+
+// ── CALC TABS ──
+function switchCalcTab(tab){
+  ['basica','precios'].forEach(function(t){
+    document.getElementById('ctab-'+t).className='calc-tab'+(t===tab?' active':'');
+    document.getElementById('cpanel-'+t).className='calc-panel'+(t===tab?' active':'');
+  });
+  calcFocused=(tab==='basica');
+}
+function switchPcTab(tab){
+  ['cv','vc'].forEach(function(t){
+    document.getElementById('pstab-'+t).className='pc-stab'+(t===tab?' active':'');
+    document.getElementById('pc-panel-'+t).style.display=t===tab?'block':'none';
+  });
+}
+function calcPrecio(){
+  var c=parseFloat(document.getElementById('pc-costo').value)||0;
+  var m=parseFloat(document.getElementById('pc-margen').value)||0;
+  var g=c*(m/100);var v=c+g;
+  document.getElementById('pc-r-costo').textContent=fmt(c);
+  document.getElementById('pc-r-margen').textContent=m+'%';
+  document.getElementById('pc-r-ganancia').textContent=fmt(g);
+  document.getElementById('pc-r-venta').textContent=fmt(v);
+}
+function calcCosto(){
+  var v=parseFloat(document.getElementById('pc-venta2').value)||0;
+  var m=parseFloat(document.getElementById('pc-margen2').value)||0;
+  var c=m>0?v/(1+(m/100)):v;var g=v-c;
+  document.getElementById('pc-r-venta2').textContent=fmt(v);
+  document.getElementById('pc-r-margen2').textContent=m+'%';
+  document.getElementById('pc-r-ganancia2').textContent=fmt(g);
+  document.getElementById('pc-r-costo2').textContent=fmt(c);
+}
+
+// ── RUBROS ──
+var rubrosData={
+  'Kiosco':{cats:['Bebidas','Golosinas','Snacks','Cigarrillos','Lácteos','Otros'],prods:[
+    {nombre:'Coca-Cola 500ml',cat:'Bebidas',precio:800},{nombre:'Pepsi 500ml',cat:'Bebidas',precio:750},
+    {nombre:'Agua mineral',cat:'Bebidas',precio:400},{nombre:'Jugo Cepita',cat:'Bebidas',precio:600},
+    {nombre:'Alfajor Milka',cat:'Golosinas',precio:350},{nombre:'Alfajor Oreo',cat:'Golosinas',precio:400},
+    {nombre:'Caramelos',cat:'Golosinas',precio:200},{nombre:'Chicles',cat:'Golosinas',precio:300},
+    {nombre:'Papas fritas',cat:'Snacks',precio:600},{nombre:'Maní',cat:'Snacks',precio:350},
+    {nombre:'Cigarrillos Marlboro',cat:'Cigarrillos',precio:2200},{nombre:'Cigarrillos Lucky',cat:'Cigarrillos',precio:1900},
+    {nombre:'Leche 1L',cat:'Lácteos',precio:1100},{nombre:'Yogur',cat:'Lácteos',precio:700},
+  ]},
+  'Carnicería':{cats:['Vacuno','Pollo','Cerdo','Embutidos','Otros'],prods:[
+    {nombre:'Asado',cat:'Vacuno',precio:3500},{nombre:'Vacío',cat:'Vacuno',precio:4000},
+    {nombre:'Matambre',cat:'Vacuno',precio:4500},{nombre:'Bife de chorizo',cat:'Vacuno',precio:5000},
+    {nombre:'Tapa de asado',cat:'Vacuno',precio:3200},{nombre:'Carne picada',cat:'Vacuno',precio:2800},
+    {nombre:'Costillas',cat:'Vacuno',precio:3000},{nombre:'Pollo entero',cat:'Pollo',precio:2500},
+    {nombre:'Pechuga de pollo',cat:'Pollo',precio:2200},{nombre:'Muslos de pollo',cat:'Pollo',precio:1800},
+    {nombre:'Chorizo',cat:'Embutidos',precio:2000},{nombre:'Morcilla',cat:'Embutidos',precio:1500},
+    {nombre:'Salchicha',cat:'Embutidos',precio:1200},{nombre:'Bondiola de cerdo',cat:'Cerdo',precio:3500},
+  ]},
+  'Verdulería':{cats:['Verduras','Frutas','Hierbas','Otros'],prods:[
+    {nombre:'Tomate (kg)',cat:'Verduras',precio:800},{nombre:'Papa (kg)',cat:'Verduras',precio:500},
+    {nombre:'Cebolla (kg)',cat:'Verduras',precio:400},{nombre:'Zanahoria (kg)',cat:'Verduras',precio:450},
+    {nombre:'Lechuga',cat:'Verduras',precio:600},{nombre:'Zapallo (kg)',cat:'Verduras',precio:350},
+    {nombre:'Choclo',cat:'Verduras',precio:400},{nombre:'Manzana (kg)',cat:'Frutas',precio:700},
+    {nombre:'Naranja (kg)',cat:'Frutas',precio:500},{nombre:'Banana (kg)',cat:'Frutas',precio:600},
+    {nombre:'Pera (kg)',cat:'Frutas',precio:800},{nombre:'Mandarina (kg)',cat:'Frutas',precio:550},
+    {nombre:'Limón (kg)',cat:'Frutas',precio:400},{nombre:'Uva (kg)',cat:'Frutas',precio:1200},
+  ]},
+  'Panadería':{cats:['Pan','Facturas','Tortas','Otros'],prods:[
+    {nombre:'Pan francés (kg)',cat:'Pan',precio:900},{nombre:'Pan lactal',cat:'Pan',precio:700},
+    {nombre:'Pan de campo (kg)',cat:'Pan',precio:1000},{nombre:'Tostadas',cat:'Pan',precio:500},
+    {nombre:'Medialuna',cat:'Facturas',precio:200},{nombre:'Facturas (docena)',cat:'Facturas',precio:2400},
+    {nombre:'Bizcochos (docena)',cat:'Facturas',precio:2000},{nombre:'Alfajor casero',cat:'Otros',precio:500},
+    {nombre:'Torta (kg)',cat:'Tortas',precio:3500},{nombre:'Budín',cat:'Tortas',precio:1200},
+  ]},
+  'Farmacia':{cats:['Medicamentos','Higiene','Vitaminas','Otros'],prods:[
+    {nombre:'Ibuprofeno 400mg',cat:'Medicamentos',precio:1500},{nombre:'Paracetamol 500mg',cat:'Medicamentos',precio:1200},
+    {nombre:'Amoxicilina',cat:'Medicamentos',precio:3500},{nombre:'Omeprazol',cat:'Medicamentos',precio:2000},
+    {nombre:'Loratadina',cat:'Medicamentos',precio:1800},{nombre:'Vitamina C',cat:'Vitaminas',precio:2500},
+    {nombre:'Complejo B',cat:'Vitaminas',precio:3000},{nombre:'Shampoo',cat:'Higiene',precio:1200},
+  ]},
+  'Ropa':{cats:['Remeras','Pantalones','Calzado','Accesorios','Otros'],prods:[
+    {nombre:'Remera básica',cat:'Remeras',precio:5000},{nombre:'Remera estampada',cat:'Remeras',precio:7000},
+    {nombre:'Pantalón de jean',cat:'Pantalones',precio:15000},{nombre:'Jogger',cat:'Pantalones',precio:8000},
+    {nombre:'Bermuda',cat:'Pantalones',precio:6000},{nombre:'Zapatillas',cat:'Calzado',precio:25000},
+    {nombre:'Ojotas',cat:'Calzado',precio:4000},{nombre:'Campera',cat:'Otros',precio:18000},
+    {nombre:'Buzo',cat:'Otros',precio:10000},{nombre:'Vestido',cat:'Otros',precio:9000},
+  ]},
+  'Bar/Restaurante':{cats:['Bebidas','Comidas','Entradas','Postres'],prods:[
+    {nombre:'Cerveza pinta',cat:'Bebidas',precio:800},{nombre:'Cerveza porción',cat:'Bebidas',precio:500},
+    {nombre:'Coca-Cola',cat:'Bebidas',precio:600},{nombre:'Café',cat:'Bebidas',precio:500},
+    {nombre:'Café con leche',cat:'Bebidas',precio:700},{nombre:'Agua',cat:'Bebidas',precio:300},
+    {nombre:'Empanada',cat:'Entradas',precio:400},{nombre:'Hamburguesa',cat:'Comidas',precio:2500},
+    {nombre:'Pizza muzzarella',cat:'Comidas',precio:3500},{nombre:'Ensalada',cat:'Comidas',precio:1800},
+  ]},
+  'Ferretería':{cats:['Fijaciones','Pinturas','Herramientas','Electricidad','Otros'],prods:[
+    {nombre:'Tornillos (100u)',cat:'Fijaciones',precio:500},{nombre:'Tuercas (50u)',cat:'Fijaciones',precio:400},
+    {nombre:'Clavos (kg)',cat:'Fijaciones',precio:600},{nombre:'Pintura blanca (4L)',cat:'Pinturas',precio:5000},
+    {nombre:'Esmalte sintético',cat:'Pinturas',precio:3500},{nombre:'Cemento (bolsa)',cat:'Otros',precio:2000},
+    {nombre:'Cinta aisladora',cat:'Electricidad',precio:400},{nombre:'Destornillador',cat:'Herramientas',precio:1500},
+    {nombre:'Martillo',cat:'Herramientas',precio:3000},{nombre:'Candado',cat:'Otros',precio:2500},
+  ]},
+};
+function onRubroChange(){
+  var rubro=document.getElementById('config-rubro').value;
+  if(!rubro||rubro==='Otro')return;
+  var data=rubrosData[rubro];if(!data)return;
+  if(!confirm('¿Cargar los productos típicos de '+rubro+'? Esto reemplazará los productos actuales.'))return;
+  state.rubro=rubro;
+  state.categorias=data.cats.concat(['Otros']);
+  state.productos=data.prods.map(function(p){return{nombre:p.nombre,categoria:p.cat,precio:p.precio};});
+  renderConfig();renderProductos();
+  showToast('Productos de '+rubro+' cargados ✓');
+}
+
+// ── PRODUCTOS PAGE ──
+var prodFilterCat='';
+var editingProdIdx=-1;
+function renderProductos(){
+  var search=(document.getElementById('prod-search')||{value:''}).value.toLowerCase();
+  // filter chips
+  var fc=document.getElementById('prod-filter-cats');
+  if(fc){
+    fc.innerHTML='<button class="prod-filter-chip'+(prodFilterCat===''?' active':'')+'" onclick="setProdFilter(\'\')">Todos</button>';
+    state.categorias.forEach(function(c){
+      fc.innerHTML+='<button class="prod-filter-chip'+(prodFilterCat===c?' active':'')+'" onclick="setProdFilter(\''+c+'\')">'+c+'</button>';
+    });
+  }
+  var list=document.getElementById('prod-list-page');if(!list)return;
+  var prods=state.productos.filter(function(p){
+    var matchSearch=!search||p.nombre.toLowerCase().includes(search);
+    var matchCat=!prodFilterCat||p.categoria===prodFilterCat;
+    return matchSearch&&matchCat;
+  });
+  if(!prods.length){list.innerHTML='<div class="prod-empty">No se encontraron productos</div>';return;}
+  list.innerHTML='';
+  prods.forEach(function(p){
+    var realIdx=state.productos.indexOf(p);
+    var div=document.createElement('div');div.className='prod-item';
+    div.innerHTML='<div class="prod-item-left"><div class="prod-item-name">'+p.nombre+'</div><div class="prod-item-cat">'+p.categoria+'</div></div>'
+      +'<span class="prod-item-price">'+fmt(p.precio)+'</span>'
+      +'<div class="prod-item-actions">'
+      +'<button class="prod-btn" onclick="editProd('+realIdx+')"><i class="ti ti-pencil"></i></button>'
+      +'<button class="prod-btn del" onclick="deleteProd('+realIdx+')"><i class="ti ti-trash"></i></button>'
+      +'</div>';
+    list.appendChild(div);
+  });
+}
+function setProdFilter(cat){prodFilterCat=cat;renderProductos();}
+function openProdModal(idx){
+  editingProdIdx=(idx===undefined?-1:idx);
+  var modal=document.getElementById('prod-modal');
+  var catSel=document.getElementById('pm-cat');
+  catSel.innerHTML=state.categorias.map(function(c){return'<option>'+c+'</option>';}).join('');
+  if(editingProdIdx>=0){
+    var p=state.productos[editingProdIdx];
+    document.getElementById('prod-modal-title').textContent='Editar producto';
+    document.getElementById('pm-nombre').value=p.nombre;
+    document.getElementById('pm-precio').value=p.precio;
+    catSel.value=p.categoria;
+  } else {
+    document.getElementById('prod-modal-title').textContent='Agregar producto';
+    document.getElementById('pm-nombre').value='';
+    document.getElementById('pm-precio').value='';
+  }
+  modal.className='modal-overlay open';
+}
+function editProd(idx){openProdModal(idx);}
+function closeProdModal(){document.getElementById('prod-modal').className='modal-overlay';}
+function saveProdModal(){
+  var nombre=document.getElementById('pm-nombre').value.trim();
+  var cat=document.getElementById('pm-cat').value;
+  var precio=parseInt(document.getElementById('pm-precio').value)||0;
+  if(!nombre||!precio){showToast('Completá nombre y precio');return;}
+  if(editingProdIdx>=0){
+    state.productos[editingProdIdx]={nombre:nombre,categoria:cat,precio:precio};
+    showToast('Producto actualizado');
+  } else {
+    state.productos.push({nombre:nombre,categoria:cat,precio:precio});
+    showToast('Producto agregado');
+  }
+  closeProdModal();renderProductos();
+}
+function deleteProd(idx){
+  if(!confirm('¿Eliminar "'+state.productos[idx].nombre+'"?'))return;
+  state.productos.splice(idx,1);renderProductos();showToast('Eliminado');
+}
 </script>
 </body>
 </html>
