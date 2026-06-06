@@ -470,6 +470,17 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
           <div class="autocomplete-list" id="ac-list" style="display:none"></div>
           <div class="cat-suggestion" id="cat-suggestion"></div>
         </div>
+        <div id="medio-pago-wrap" style="margin-bottom:10px;">
+          <div class="nd-lbl">Medio de Pago</div>
+          <select id="cargar-medio" style="width:100%;padding:10px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;">
+            <option value="">Seleccionar medio...</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+            <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Cuenta Corriente (Fiado)">Cuenta Corriente (Fiado)</option>
+          </select>
+        </div>
         <div class="numpad-grid" id="np-cargar">
           <button class="np-key" data-d="7">7</button><button class="np-key" data-d="8">8</button><button class="np-key" data-d="9">9</button>
           <button class="np-key" data-d="4">4</button><button class="np-key" data-d="5">5</button><button class="np-key" data-d="6">6</button>
@@ -903,6 +914,7 @@ function setCargarTipo(tipo){
     document.getElementById('cargar-lbl').textContent='Monto de la venta';
     document.getElementById('btn-confirm-cargar').innerHTML='<i class="ti ti-check"></i> Confirmar venta';
     document.getElementById('btn-confirm-cargar').className='btn-confirm';
+    document.getElementById('medio-pago-wrap').style.display='block';
   } else {
     document.getElementById('tt-v').className='tt-btn';
     document.getElementById('tt-g').className='tt-btn active-g';
@@ -910,6 +922,8 @@ function setCargarTipo(tipo){
     document.getElementById('cargar-lbl').textContent='Monto del gasto';
     document.getElementById('btn-confirm-cargar').innerHTML='<i class="ti ti-check"></i> Confirmar gasto';
     document.getElementById('btn-confirm-cargar').className='btn-confirm red';
+    document.getElementById('medio-pago-wrap').style.display='none';
+    document.getElementById('cargar-medio').value='';
   }
 }
 document.getElementById('np-cargar').addEventListener('click',function(e){
@@ -922,21 +936,23 @@ document.getElementById('np-cargar').addEventListener('click',function(e){
 function confirmarCargar(){
   var monto=cargarRaw?parseInt(cargarRaw,10):0;
   if(!monto){showToast('Ingresá un monto');return;}
+  var medio=document.getElementById('cargar-medio').value;
+  if(cargarTipo==='venta'&&!medio){showToast('Seleccioná un medio de pago');return;}
   var now=new Date();
   var hora=('0'+now.getHours()).slice(-2)+':'+('0'+now.getMinutes()).slice(-2);
   var desc=document.getElementById('cargar-desc').value.trim()||(cargarTipo==='venta'?'Venta':'Gasto');
   var cat=selectedCat||detectCat(desc)||'Otros';
-  // auto-registrar producto si es nuevo
   var existe=state.productos.some(function(p){return p.nombre.toLowerCase()===desc.toLowerCase();});
   if(!existe&&desc&&desc!=='Venta'&&desc!=='Gasto'){
     state.productos.push({nombre:desc,categoria:cat,precio:monto});
   }
   if(cargarTipo==='venta')state.ventas+=monto;else state.gastosTotales+=monto;
-  state.movimientos.push({tipo:cargarTipo,monto:monto,desc:desc,cat:cat,hora:hora});
-  showToast(cargarTipo==='venta'?'✓ Venta cargada · '+cat:'✓ Gasto cargado · '+cat);
+  state.movimientos.push({tipo:cargarTipo,monto:monto,desc:desc,cat:cat,hora:hora,medio:medio||null});
+  showToast(cargarTipo==='venta'?'✓ Venta cargada · '+medio:'✓ Gasto cargado · '+cat);
   cargarRaw='';selectedCat='';
   document.getElementById('cargar-val').textContent='$0';
   document.getElementById('cargar-desc').value='';
+  document.getElementById('cargar-medio').value='';
   document.getElementById('cat-suggestion').innerHTML='';
   showPage(currentRole==='owner'?'inicio':'emp-inicio');
 }
