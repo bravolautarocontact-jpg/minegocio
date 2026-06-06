@@ -35,6 +35,66 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;}
 
+/* ── LANDING PAGE ── */
+.lp{display:flex;flex-direction:column;min-height:100vh;background:#0C2B1F;color:#EAF5F0;overflow-x:hidden;}
+.lp-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:0.5px solid rgba(255,255,255,.08);}
+.lp-nav-logo{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#5DCAA5;letter-spacing:.08em;text-transform:uppercase;}
+.lp-nav-logo i{font-size:18px;}
+.lp-nav-actions{display:flex;align-items:center;gap:10px;}
+.lp-btn-ghost{padding:8px 16px;border-radius:8px;border:0.5px solid rgba(255,255,255,.2);background:none;color:rgba(255,255,255,.7);font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.lp-btn-ghost:hover{background:rgba(255,255,255,.06);color:#EAF5F0;}
+.lp-btn-wa{padding:8px 16px;border-radius:8px;border:none;background:#25D366;color:#fff;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;transition:opacity .15s;}
+.lp-btn-wa:hover{opacity:.88;}
+/* Hero */
+.lp-hero{padding:60px 24px 48px;max-width:680px;}
+.lp-hero-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#5DCAA5;border:0.5px solid rgba(93,202,165,.3);padding:4px 12px;border-radius:20px;margin-bottom:24px;letter-spacing:.04em;}
+.lp-hero-h1{font-size:clamp(36px,7vw,64px);font-weight:500;line-height:1.08;letter-spacing:-.03em;margin-bottom:20px;color:#EAF5F0;}
+.lp-hero-h1 em{color:#5DCAA5;font-style:normal;}
+.lp-hero-sub{font-size:16px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:36px;max-width:480px;}
+.lp-hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.lp-cta-primary{padding:13px 24px;border-radius:8px;border:none;background:#5DCAA5;color:#0C2B1F;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.01em;transition:opacity .15s;}
+.lp-cta-primary:hover{opacity:.88;}
+.lp-cta-secondary{padding:13px 24px;border-radius:8px;border:0.5px solid rgba(255,255,255,.15);background:none;color:rgba(255,255,255,.7);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.lp-cta-secondary:hover{background:rgba(255,255,255,.06);color:#EAF5F0;}
+/* Stats */
+.lp-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:0.5px solid rgba(255,255,255,.08);border-bottom:0.5px solid rgba(255,255,255,.08);}
+.lp-stat{padding:24px;border-right:0.5px solid rgba(255,255,255,.08);}
+.lp-stat:nth-child(2n){border-right:none;}
+.lp-stat-num{font-size:28px;font-weight:500;color:#EAF5F0;font-family:'DM Mono',monospace;letter-spacing:-.02em;}
+.lp-stat-num.accent{color:#5DCAA5;}
+.lp-stat-lbl{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;}
+/* Features */
+.lp-section{padding:48px 24px;}
+.lp-section-tag{font-size:11px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:32px;}
+.lp-features{display:flex;flex-direction:column;}
+.lp-feat{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:0.5px solid rgba(255,255,255,.06);}
+.lp-feat:last-child{border-bottom:none;}
+.lp-feat-name{font-size:15px;color:rgba(255,255,255,.75);}
+.lp-feat-dot{width:8px;height:8px;border-radius:50%;background:#5DCAA5;flex-shrink:0;}
+/* Rubros */
+.lp-rubros{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.lp-rubro-chip{padding:6px 14px;border-radius:20px;border:0.5px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.55);background:rgba(255,255,255,.04);}
+.lp-rubro-chip.more{color:#5DCAA5;border-color:rgba(93,202,165,.3);}
+/* Pricing */
+.lp-price-card{background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.1);border-radius:12px;padding:28px 24px;margin:0 24px 48px;}
+.lp-price-badge{display:inline-block;font-size:11px;color:#5DCAA5;border:0.5px solid rgba(93,202,165,.3);padding:3px 10px;border-radius:20px;margin-bottom:16px;letter-spacing:.04em;}
+.lp-price-num{font-size:44px;font-weight:500;color:#EAF5F0;font-family:'DM Mono',monospace;letter-spacing:-.03em;margin-bottom:4px;}
+.lp-price-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:24px;line-height:1.5;}
+.lp-price-cta{width:100%;padding:13px;border-radius:8px;border:none;background:#5DCAA5;color:#0C2B1F;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;}
+.lp-price-cta:hover{opacity:.88;}
+/* Footer */
+.lp-footer{padding:24px;border-top:0.5px solid rgba(255,255,255,.06);font-size:12px;color:rgba(255,255,255,.2);text-align:center;}
+/* Desktop */
+@media(min-width:768px){
+  .lp-nav{padding:20px 48px;}
+  .lp-hero{padding:80px 48px 64px;max-width:800px;}
+  .lp-stats{grid-template-columns:repeat(4,1fr);}
+  .lp-stat{border-right:0.5px solid rgba(255,255,255,.08);}
+  .lp-stat:last-child{border-right:none;}
+  .lp-section{padding:64px 48px;}
+  .lp-price-card{margin:0 48px 64px;}
+}
+
 /* ── AUTH SCREEN — Split Editorial ── */
 .auth-screen{display:flex;min-height:100vh;background:var(--surface);}
 
@@ -603,6 +663,74 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 <body>
 
 <!-- SELECCIÓN DE PERFIL -->
+<!-- LANDING PAGE -->
+<div class="lp" id="landing-page">
+  <nav class="lp-nav">
+    <div class="lp-nav-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
+    <div class="lp-nav-actions">
+      <button class="lp-btn-ghost" onclick="showAuthFromLanding('login')">Iniciar sesión</button>
+      <a class="lp-btn-wa" href="https://wa.me/5491100000000" target="_blank"><i class="ti ti-brand-whatsapp"></i> Consultas</a>
+    </div>
+  </nav>
+
+  <div class="lp-hero">
+    <div class="lp-hero-tag"><i class="ti ti-sparkles"></i> 14 días gratis · Sin tarjeta</div>
+    <h1 class="lp-hero-h1">Tu comercio,<br>bajo <em>control</em><br>total.</h1>
+    <p class="lp-hero-sub">Ventas, caja, fiados y productos en una sola app. Para cualquier rubro, desde el primer día.</p>
+    <div class="lp-hero-ctas">
+      <button class="lp-cta-primary" onclick="showAuthFromLanding('register')">Empezar gratis →</button>
+      <button class="lp-cta-secondary" onclick="showAuthFromLanding('login')">Ya tengo cuenta</button>
+    </div>
+  </div>
+
+  <div class="lp-stats">
+    <div class="lp-stat"><div class="lp-stat-num accent">+29</div><div class="lp-stat-lbl">rubros soportados</div></div>
+    <div class="lp-stat"><div class="lp-stat-num">14 días</div><div class="lp-stat-lbl">prueba gratis · sin tarjeta</div></div>
+    <div class="lp-stat"><div class="lp-stat-num accent">24/7</div><div class="lp-stat-lbl">soporte vía WhatsApp</div></div>
+    <div class="lp-stat"><div class="lp-stat-num">$0</div><div class="lp-stat-lbl">para empezar hoy</div></div>
+  </div>
+
+  <div class="lp-section">
+    <div class="lp-section-tag">Funcionalidades</div>
+    <div class="lp-features">
+      <div class="lp-feat"><span class="lp-feat-name">Ventas con múltiples medios de pago</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Caja diaria con cierre automático</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Fiados y cuenta corriente</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Catálogo de productos por rubro</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Gráficas de ventas y clientes</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Calculadora de precios y márgenes</span><span class="lp-feat-dot"></span></div>
+      <div class="lp-feat"><span class="lp-feat-name">Acceso para empleados</span><span class="lp-feat-dot"></span></div>
+    </div>
+
+    <div style="margin-top:48px;">
+      <div class="lp-section-tag">Rubros soportados</div>
+      <div class="lp-rubros">
+        <span class="lp-rubro-chip">Panadería / Confitería</span>
+        <span class="lp-rubro-chip">Fiambrería</span>
+        <span class="lp-rubro-chip">Despensa / Almacén</span>
+        <span class="lp-rubro-chip">Verdulería / Frutería</span>
+        <span class="lp-rubro-chip">Carnicería</span>
+        <span class="lp-rubro-chip">Dietética</span>
+        <span class="lp-rubro-chip">Rotisería</span>
+        <span class="lp-rubro-chip">Kiosco</span>
+        <span class="lp-rubro-chip">Farmacia</span>
+        <span class="lp-rubro-chip">Ferretería</span>
+        <span class="lp-rubro-chip">Ropa y accesorios</span>
+        <span class="lp-rubro-chip more">+18 más →</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="lp-price-card">
+    <div class="lp-price-badge">Plan gratuito disponible</div>
+    <div class="lp-price-num">$0</div>
+    <div class="lp-price-sub">Para siempre en el plan base.<br>Sin contratos, sin sorpresas.</div>
+    <button class="lp-price-cta" onclick="showAuthFromLanding('register')">Crear cuenta gratis →</button>
+  </div>
+
+  <div class="lp-footer">© 2025 Mi Negocio · Hecho para comercios argentinos</div>
+</div>
+
 <!-- AUTH SCREEN — Split Editorial -->
 <div class="auth-screen" id="auth-screen">
 
@@ -1742,7 +1870,19 @@ var auth=firebase.auth();
 var db=firebase.firestore();
 var currentUid=null;
 
+function showLanding(){
+  document.getElementById('landing-page').style.display='flex';
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('select-screen').style.display='none';
+  document.getElementById('app').style.display='none';
+}
+function showAuthFromLanding(tab){
+  document.getElementById('landing-page').style.display='none';
+  showAuthScreen();
+  if(tab)switchAuthTab(tab);
+}
 function showAuthScreen(){
+  document.getElementById('landing-page').style.display='none';
   document.getElementById('auth-screen').style.display='flex';
   document.getElementById('select-screen').style.display='none';
   document.getElementById('app').style.display='none';
@@ -1839,7 +1979,7 @@ auth.onAuthStateChanged(function(user){
     });
   } else {
     currentUid=null;
-    showAuthScreen();
+    showLanding();
   }
 });
 
