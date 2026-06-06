@@ -35,27 +35,179 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;}
 
-/* AUTH SCREEN */
-.auth-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:var(--bg);}
-.auth-logo{font-size:22px;font-weight:500;color:var(--green);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
-.auth-logo i{font-size:26px;}
-.auth-sub{font-size:13px;color:var(--text2);margin-bottom:12px;}
-.auth-badge{background:var(--green-light);color:var(--green);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;margin-bottom:24px;}
-.auth-box{width:100%;max-width:380px;}
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface2);border-radius:var(--radius);padding:4px;gap:4px;margin-bottom:20px;}
-.auth-tab{padding:9px;border-radius:8px;border:none;background:none;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text2);transition:all .12s;}
-.auth-tab.active{background:var(--green);color:white;}
-.auth-field{margin-bottom:12px;}
-.auth-field label{display:block;font-size:10px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
-.auth-field input,.auth-field select{width:100%;padding:11px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .12s;}
-.auth-field input:focus,.auth-field select:focus{border-color:var(--green);}
-.auth-btn{width:100%;padding:13px;border-radius:var(--radius-sm);border:none;background:var(--green);color:white;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px;transition:background .12s;}
-.auth-btn:hover{background:var(--green-dark);}
-.auth-divider{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--text3);font-size:12px;}
-.auth-divider::before,.auth-divider::after{content:'';flex:1;height:0.5px;background:var(--border-med);}
-.auth-google{width:100%;padding:11px;border-radius:var(--radius-sm);border:1px solid var(--border-med);background:var(--surface);color:var(--text);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .12s;}
+/* ── AUTH SCREEN — Split Editorial ── */
+.auth-screen{display:flex;min-height:100vh;background:var(--surface);}
+
+/* Panel izquierdo — identidad de marca */
+.auth-brand{
+  display:none;
+  flex-direction:column;
+  justify-content:space-between;
+  width:420px;flex-shrink:0;
+  background:#0C2B1F;
+  padding:48px 44px;
+  position:relative;
+  overflow:hidden;
+}
+/* Textura CSS — grid sutil, sin imágenes ni blur */
+.auth-brand::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+}
+/* Marca de agua tipográfica */
+.auth-brand::after{
+  content:'MN';position:absolute;
+  right:-20px;bottom:-20px;
+  font-size:220px;font-weight:500;
+  color:rgba(255,255,255,.03);
+  line-height:1;pointer-events:none;
+  font-family:'DM Mono',monospace;
+  user-select:none;
+}
+.auth-brand-top{}
+.auth-brand-wordmark{
+  font-size:15px;font-weight:500;
+  color:rgba(255,255,255,.5);
+  letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:64px;
+}
+.auth-brand-wordmark i{font-size:16px;}
+.auth-brand-headline{
+  font-size:36px;font-weight:500;
+  color:#EAF5F0;line-height:1.2;
+  margin-bottom:8px;
+  letter-spacing:-.02em;
+}
+.auth-brand-sub{
+  font-size:14px;color:rgba(255,255,255,.45);
+  line-height:1.6;margin-bottom:40px;
+}
+.auth-brand-props{display:flex;flex-direction:column;gap:12px;}
+.auth-brand-prop{
+  display:flex;align-items:center;gap:10px;
+  font-size:13px;color:rgba(255,255,255,.6);
+}
+.auth-brand-prop span{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(93,202,165,.15);
+  border:0.5px solid rgba(93,202,165,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:#5DCAA5;flex-shrink:0;
+}
+.auth-brand-bottom{
+  font-size:11px;color:rgba(255,255,255,.2);
+  letter-spacing:.04em;
+}
+
+/* Panel derecho — formulario */
+.auth-form-panel{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:40px 24px;
+  background:var(--surface);
+  overflow-y:auto;
+}
+.auth-form-inner{width:100%;max-width:360px;}
+
+/* Header del form */
+.auth-form-header{margin-bottom:28px;}
+.auth-form-title{font-size:22px;font-weight:500;color:var(--text);letter-spacing:-.02em;margin-bottom:4px;}
+.auth-form-sub{font-size:13px;color:var(--text3);}
+
+/* Mobile: logo visible solo en mobile */
+.auth-mobile-logo{
+  display:flex;align-items:center;gap:7px;
+  font-size:15px;font-weight:500;color:var(--green);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.auth-mobile-logo i{font-size:18px;}
+
+/* Tabs */
+.auth-tabs{
+  display:grid;grid-template-columns:1fr 1fr;
+  background:var(--surface2);border-radius:var(--radius-sm);
+  padding:3px;gap:3px;margin-bottom:24px;
+}
+.auth-tab{
+  padding:9px;border-radius:6px;border:none;
+  background:none;font-size:13px;font-weight:500;
+  cursor:pointer;font-family:'DM Sans',sans-serif;
+  color:var(--text3);transition:all .15s;
+}
+.auth-tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08);}
+
+/* Campos */
+.auth-field{margin-bottom:14px;}
+.auth-field label{
+  display:block;font-size:11px;font-weight:500;
+  color:var(--text3);letter-spacing:.05em;
+  text-transform:uppercase;margin-bottom:5px;
+}
+.auth-field input,.auth-field select{
+  width:100%;padding:10px 13px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border-med);
+  background:var(--surface2);color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:14px;
+  outline:none;transition:border-color .15s,background .15s;
+}
+.auth-field input:focus,.auth-field select:focus{
+  border-color:var(--green);background:var(--surface);
+}
+
+/* Botón primario */
+.auth-btn{
+  width:100%;padding:12px;
+  border-radius:var(--radius-sm);border:none;
+  background:#0C2B1F;color:#EAF5F0;
+  font-size:14px;font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;margin-top:6px;
+  transition:opacity .15s;letter-spacing:.01em;
+}
+.auth-btn:hover{opacity:.85;}
+
+/* Divider */
+.auth-divider{
+  display:flex;align-items:center;gap:10px;
+  margin:16px 0;color:var(--text3);font-size:12px;
+}
+.auth-divider::before,.auth-divider::after{
+  content:'';flex:1;height:0.5px;background:var(--border);
+}
+
+/* Google */
+.auth-google{
+  width:100%;padding:10px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border-med);
+  background:var(--surface);color:var(--text);
+  font-size:13px;font-weight:500;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  transition:background .15s;
+}
 .auth-google:hover{background:var(--surface2);}
-.auth-error{background:var(--red);color:var(--red-text);border-radius:var(--radius-sm);padding:9px 12px;font-size:13px;margin-bottom:12px;display:none;}
+
+/* Error */
+.auth-error{
+  background:var(--red);color:var(--red-text);
+  border-radius:var(--radius-sm);padding:9px 12px;
+  font-size:13px;margin-bottom:14px;display:none;
+  border-left:2px solid var(--red-text);
+}
+
+/* Responsive: mostrar panel izquierdo en desktop */
+@media(min-width:768px){
+  .auth-brand{display:flex;}
+  .auth-mobile-logo{display:none;}
+  .auth-form-panel{padding:60px 64px;}
+}
 /* SELECT SCREEN */
 .select-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 .ss-logo{display:flex;align-items:center;gap:8px;font-size:18px;font-weight:500;color:var(--green);margin-bottom:8px;}
@@ -451,53 +603,83 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 <body>
 
 <!-- SELECCIÓN DE PERFIL -->
-<!-- AUTH SCREEN -->
+<!-- AUTH SCREEN — Split Editorial -->
 <div class="auth-screen" id="auth-screen">
-  <div class="auth-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
-  <div class="auth-sub">Ingresá o creá tu cuenta gratis</div>
-  <div class="auth-badge">✨ 14 días gratis — Sin tarjeta, sin compromiso</div>
-  <div class="auth-box">
-    <div class="auth-tabs">
-      <button class="auth-tab" id="atab-login" onclick="switchAuthTab('login')">Iniciar sesión</button>
-      <button class="auth-tab active" id="atab-register" onclick="switchAuthTab('register')">Registrarse</button>
-    </div>
-    <div id="auth-error" class="auth-error"></div>
-    <!-- REGISTER -->
-    <div id="auth-panel-register">
-      <div class="auth-field"><label>Nombre del comercio</label><input type="text" id="reg-biz" placeholder="Almacén Don Juan"></div>
-      <div class="auth-field"><label>Rubro</label>
-        <select id="reg-rubro">
-          <option value="">Seleccioná tu rubro...</option>
-          <option>Panadería / Confitería</option><option>Fiambrería</option>
-          <option>Despensa / Almacén</option><option>Fiambrería y Despensa</option>
-          <option>Verdulería / Frutería</option><option>Carnicería</option>
-          <option>Dietética</option><option>Rotisería</option><option>Kiosco</option>
-          <option>Farmacia</option><option>Perfumería / Cosmética</option><option>Óptica</option>
-          <option>Ferretería</option><option>Corralón / Materiales de construcción</option>
-          <option>Pinturería</option><option>Ropa y accesorios</option><option>Zapatería</option>
-          <option>Electrónica / Computación</option><option>Celulares y accesorios</option>
-          <option>Librería / Papelería</option><option>Juguetería</option>
-          <option>Veterinaria</option><option>Cerrajería</option><option>Floristería</option>
-          <option>Bazar / Artículos del hogar</option><option>Inmobiliaria</option>
-          <option>Bar / Restaurante</option><option>Química / Productos químicos</option>
-          <option>Forrajería</option><option>Otro</option>
-        </select>
+
+  <!-- Panel izquierdo: identidad de marca (desktop only) -->
+  <div class="auth-brand">
+    <div class="auth-brand-top">
+      <div class="auth-brand-wordmark"><i class="ti ti-building-store"></i> Mi Negocio</div>
+      <div class="auth-brand-headline">Tu negocio,<br>en orden.</div>
+      <div class="auth-brand-sub">La herramienta que necesita tu comercio para controlar ventas, gastos y fiados — sin complicaciones.</div>
+      <div class="auth-brand-props">
+        <div class="auth-brand-prop"><span><i class="ti ti-check"></i></span> Caja diaria en segundos</div>
+        <div class="auth-brand-prop"><span><i class="ti ti-check"></i></span> Fiados y deudas bajo control</div>
+        <div class="auth-brand-prop"><span><i class="ti ti-check"></i></span> Productos pre-cargados por rubro</div>
       </div>
-      <div class="auth-field"><label>Email</label><input type="email" id="reg-email" placeholder="tu@email.com"></div>
-      <div class="auth-field"><label>Contraseña</label><input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres"></div>
-      <button class="auth-btn" onclick="doRegister()">Crear cuenta gratis</button>
     </div>
-    <!-- LOGIN -->
-    <div id="auth-panel-login" style="display:none">
-      <div class="auth-field"><label>Email</label><input type="email" id="log-email" placeholder="tu@email.com"></div>
-      <div class="auth-field"><label>Contraseña</label><input type="password" id="log-pass" placeholder="Tu contraseña"></div>
-      <button class="auth-btn" onclick="doLogin()">Ingresar</button>
+    <div class="auth-brand-bottom">© 2025 Mi Negocio · Plan gratuito disponible</div>
+  </div>
+
+  <!-- Panel derecho: formulario -->
+  <div class="auth-form-panel">
+    <div class="auth-form-inner">
+
+      <!-- Logo visible solo en mobile -->
+      <div class="auth-mobile-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
+
+      <div class="auth-form-header">
+        <div class="auth-form-title" id="auth-form-title">Creá tu cuenta</div>
+        <div class="auth-form-sub" id="auth-form-sub">14 días gratis, sin tarjeta.</div>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab" id="atab-login" onclick="switchAuthTab('login')">Iniciar sesión</button>
+        <button class="auth-tab active" id="atab-register" onclick="switchAuthTab('register')">Registrarse</button>
+      </div>
+
+      <div id="auth-error" class="auth-error"></div>
+
+      <!-- REGISTER -->
+      <div id="auth-panel-register">
+        <div class="auth-field"><label>Nombre del comercio</label><input type="text" id="reg-biz" placeholder="Almacén Don Juan"></div>
+        <div class="auth-field"><label>Rubro</label>
+          <select id="reg-rubro">
+            <option value="">Seleccioná tu rubro...</option>
+            <option>Panadería / Confitería</option><option>Fiambrería</option>
+            <option>Despensa / Almacén</option><option>Fiambrería y Despensa</option>
+            <option>Verdulería / Frutería</option><option>Carnicería</option>
+            <option>Dietética</option><option>Rotisería</option><option>Kiosco</option>
+            <option>Farmacia</option><option>Perfumería / Cosmética</option><option>Óptica</option>
+            <option>Ferretería</option><option>Corralón / Materiales de construcción</option>
+            <option>Pinturería</option><option>Ropa y accesorios</option><option>Zapatería</option>
+            <option>Electrónica / Computación</option><option>Celulares y accesorios</option>
+            <option>Librería / Papelería</option><option>Juguetería</option>
+            <option>Veterinaria</option><option>Cerrajería</option><option>Floristería</option>
+            <option>Bazar / Artículos del hogar</option><option>Inmobiliaria</option>
+            <option>Bar / Restaurante</option><option>Química / Productos químicos</option>
+            <option>Forrajería</option><option>Otro</option>
+          </select>
+        </div>
+        <div class="auth-field"><label>Email</label><input type="email" id="reg-email" placeholder="tu@email.com"></div>
+        <div class="auth-field"><label>Contraseña</label><input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres"></div>
+        <button class="auth-btn" onclick="doRegister()">Crear cuenta gratis →</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="auth-panel-login" style="display:none">
+        <div class="auth-field"><label>Email</label><input type="email" id="log-email" placeholder="tu@email.com"></div>
+        <div class="auth-field"><label>Contraseña</label><input type="password" id="log-pass" placeholder="Tu contraseña"></div>
+        <button class="auth-btn" onclick="doLogin()">Ingresar →</button>
+      </div>
+
+      <div class="auth-divider">o</div>
+      <button class="auth-google" onclick="doGoogle()">
+        <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Continuar con Google
+      </button>
+
     </div>
-    <div class="auth-divider">o</div>
-    <button class="auth-google" onclick="doGoogle()">
-      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      Continuar con Google
-    </button>
   </div>
 </div>
 
@@ -1576,6 +1758,8 @@ function switchAuthTab(tab){
   document.getElementById('auth-panel-login').style.display=tab==='login'?'block':'none';
   document.getElementById('auth-panel-register').style.display=tab==='register'?'block':'none';
   document.getElementById('auth-error').style.display='none';
+  document.getElementById('auth-form-title').textContent=tab==='login'?'Bienvenido de vuelta':'Creá tu cuenta';
+  document.getElementById('auth-form-sub').textContent=tab==='login'?'Ingresá con tu cuenta.':'14 días gratis, sin tarjeta.';
 }
 function showAuthError(msg){
   var el=document.getElementById('auth-error');
