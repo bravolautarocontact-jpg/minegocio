@@ -881,6 +881,9 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 </div>
 
 <script>
+// ── SECURITY: HTML escape ──
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+
 // ── STATE ──
 var currentRole='owner';
 var state={
@@ -1048,9 +1051,9 @@ function updateDashboard(){
     list.innerHTML='';
     state.movimientos.slice().reverse().slice(0,6).forEach(function(m){
       var el=document.createElement('div');el.className='mov-item';
-      el.innerHTML='<div><div class="mov-desc">'+(m.desc||m.tipo)+'</div>'
-        +(m.cat?'<div class="mov-cat">'+m.cat+(m.medio?' · '+m.medio:'')+'</div>':'')
-        +'<div class="mov-time">'+m.hora+'</div></div>'
+      el.innerHTML='<div><div class="mov-desc">'+esc(m.desc||m.tipo)+'</div>'
+        +(m.cat?'<div class="mov-cat">'+esc(m.cat)+(m.medio?' · '+esc(m.medio):'')+'</div>':'')
+        +'<div class="mov-time">'+esc(m.hora)+'</div></div>'
         +'<div class="'+(m.tipo==='venta'?'mov-pos':'mov-neg')+'">'+(m.tipo==='venta'?'+':'-')+fmt(m.monto)+'</div>';
       list.appendChild(el);
     });
@@ -1121,7 +1124,7 @@ document.addEventListener('DOMContentLoaded',function(){
       acList.innerHTML='';
       matches.forEach(function(p){
         var item=document.createElement('div');item.className='ac-item';
-        item.innerHTML='<div><div class="ac-name">'+p.nombre+'</div><div class="ac-cat">'+p.categoria+'</div></div><span class="ac-price">'+fmt(p.precio)+'</span>';
+        item.innerHTML='<div><div class="ac-name">'+esc(p.nombre)+'</div><div class="ac-cat">'+esc(p.categoria)+'</div></div><span class="ac-price">'+fmt(p.precio)+'</span>';
         item.onclick=function(){
           descInput.value=p.nombre;
           if(!cargarRaw||parseInt(cargarRaw,10)===0){
@@ -1155,7 +1158,7 @@ function renderCatBadges(selected){
   state.categorias.forEach(function(cat){
     var btn=document.createElement('span');
     btn.className='cat-badge'+(cat===selected?' selected':'');
-    btn.innerHTML='<i class="ti ti-tag" aria-hidden="true"></i>'+cat;
+    btn.innerHTML='<i class="ti ti-tag" aria-hidden="true"></i>'+esc(cat);
     btn.onclick=function(){selectedCat=cat;renderCatBadges(cat);};
     el.appendChild(btn);
   });
@@ -1347,7 +1350,7 @@ function renderGastosAdded(){
   var el=document.getElementById('gastos-added');el.innerHTML='';
   cierreGastos.forEach(function(g,i){
     var div=document.createElement('div');div.className='g-item';
-    div.innerHTML='<span class="gi-desc">'+g.desc+'</span><div class="gi-right"><span class="gi-amt">-'+fmt(g.monto)+'</span><button class="gi-del" onclick="removeGasto('+i+')"><i class="ti ti-x"></i></button></div>';
+    div.innerHTML='<span class="gi-desc">'+esc(g.desc)+'</span><div class="gi-right"><span class="gi-amt">-'+fmt(g.monto)+'</span><button class="gi-del" onclick="removeGasto('+i+')"><i class="ti ti-x"></i></button></div>';
     el.appendChild(div);
   });
 }
@@ -1424,11 +1427,11 @@ function renderFiados(){
       +'</div>':'';
     var configRow=currentRole==='owner'?'<div class="fp-config-row">'
       +'<div><label>Interés mora (%/mes)</label><input type="number" min="0" max="100" step="0.5" id="fp-int-'+pi+'" value="'+(p.interes||0)+'" onchange="updateInteres('+pi+',this.value)"></div>'
-      +'<div><label>Nombre</label><input type="text" id="fp-nombre-'+pi+'" value="'+p.nombre+'" onchange="updateNombreFiado('+pi+',this.value)"></div>'
+      +'<div><label>Nombre</label><input type="text" id="fp-nombre-'+pi+'" value="'+esc(p.nombre)+'" onchange="updateNombreFiado('+pi+',this.value)"></div>'
       +'</div>':'';
     div.innerHTML='<div class="fp-header" onclick="toggleFiado(this)">'
-      +'<div class="fp-left"><div class="fp-avatar'+(hasOverdue?' overdue':'')+'">'+p.iniciales+'</div>'
-      +'<div><div class="fp-name">'+p.nombre+'</div>'
+      +'<div class="fp-left"><div class="fp-avatar'+(hasOverdue?' overdue':'')+'">'+esc(p.iniciales)+'</div>'
+      +'<div><div class="fp-name">'+esc(p.nombre)+'</div>'
       +'<div class="fp-meta">'+p.deudas.length+' deuda'+(p.deudas.length!==1?'s':'')+' · '
       +(p.interes?'<span style="color:var(--amber-text)">'+p.interes+'% interés</span>':'sin interés')
       +(hasOverdue?' · <span class="overdue-tag">Vencido</span>':'')+'</div></div></div>'
@@ -1499,7 +1502,7 @@ function renderConfig(){
   var cl=document.getElementById('cat-list');cl.innerHTML='';
   state.categorias.forEach(function(cat,i){
     var div=document.createElement('div');div.className='cat-item';
-    div.innerHTML='<span class="cat-name-text">'+cat+'</span>'
+    div.innerHTML='<span class="cat-name-text">'+esc(cat)+'</span>'
       +(state.categorias.length>1?'<button class="cat-del" onclick="delCategoria('+i+')"><i class="ti ti-trash"></i></button>':'');
     cl.appendChild(div);
   });
@@ -1511,7 +1514,7 @@ function renderProdList(){
   var pl=document.getElementById('prod-list');pl.innerHTML='';
   state.productos.forEach(function(p,i){
     var div=document.createElement('div');div.className='prod-item';
-    div.innerHTML='<span class="prod-name">'+p.nombre+'</span>'
+    div.innerHTML='<span class="prod-name">'+esc(p.nombre)+'</span>'
       +'<span class="prod-cat">'+p.categoria+'</span>'
       +'<span class="prod-price">'+fmt(p.precio)+'</span>'
       +'<button class="prod-del" onclick="delProducto('+i+')"><i class="ti ti-trash"></i></button>';
@@ -1938,7 +1941,7 @@ function renderProductos(){
   if(fc){
     fc.innerHTML='<button class="prod-filter-chip'+(prodFilterCat===''?' active':'')+'" onclick="setProdFilter(\'\')">Todos</button>';
     state.categorias.forEach(function(c){
-      fc.innerHTML+='<button class="prod-filter-chip'+(prodFilterCat===c?' active':'')+'" onclick="setProdFilter(\''+c+'\')">'+c+'</button>';
+      fc.innerHTML+='<button class="prod-filter-chip'+(prodFilterCat===c?' active':'')+'" onclick="setProdFilter(\''+esc(c)+'\')">'+esc(c)+'</button>';
     });
   }
   var list=document.getElementById('prod-list-page');if(!list)return;
@@ -1952,7 +1955,7 @@ function renderProductos(){
   prods.forEach(function(p){
     var realIdx=state.productos.indexOf(p);
     var div=document.createElement('div');div.className='prod-item';
-    div.innerHTML='<div class="prod-item-left"><div class="prod-item-name">'+p.nombre+'</div><div class="prod-item-cat">'+p.categoria+'</div></div>'
+    div.innerHTML='<div class="prod-item-left"><div class="prod-item-name">'+esc(p.nombre)+'</div><div class="prod-item-cat">'+esc(p.categoria)+'</div></div>'
       +'<span class="prod-item-price">'+fmt(p.precio)+'</span>'
       +'<div class="prod-item-actions">'
       +'<button class="prod-btn" onclick="editProd('+realIdx+')"><i class="ti ti-pencil"></i></button>'
@@ -1966,7 +1969,7 @@ function openProdModal(idx){
   editingProdIdx=(idx===undefined?-1:idx);
   var modal=document.getElementById('prod-modal');
   var catSel=document.getElementById('pm-cat');
-  catSel.innerHTML=state.categorias.map(function(c){return'<option>'+c+'</option>';}).join('');
+  catSel.innerHTML=state.categorias.map(function(c){return'<option>'+esc(c)+'</option>';}).join('');
   if(editingProdIdx>=0){
     var p=state.productos[editingProdIdx];
     document.getElementById('prod-modal-title').textContent='Editar producto';
