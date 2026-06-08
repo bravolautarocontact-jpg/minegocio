@@ -260,13 +260,27 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);colo
 }
 .lp-price-cta:hover{opacity:.85;}
 
+/* FEATURES STRIP */
+.lp-feats-strip{
+  display:flex;flex-wrap:wrap;gap:0;
+  border-top:1.5px solid #111;
+}
+.lp-fs-item{
+  flex:1;min-width:140px;
+  display:flex;align-items:center;gap:8px;
+  padding:16px 20px;font-size:13px;font-weight:600;
+  color:#0A0A0A;border-right:1.5px solid #111;
+}
+.lp-fs-item:last-child{border-right:none;}
+.lp-fs-item i{font-size:16px;color:#0A0A0A;}
+
 /* FOOTER */
 .lp-footer{
-  background:#0A0A0A;padding:28px 20px;
+  background:#0A0A0A;padding:20px 20px;
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:12px;
 }
-.lp-footer-logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff;}
+.lp-footer-logo{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#fff;}
 .lp-footer-copy{font-size:12px;color:rgba(255,255,255,.3);}
 
 /* RESPONSIVE */
@@ -857,32 +871,20 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
 </head>
 <body>
 
-<!-- SELECCIÓN DE PERFIL -->
-<!-- LANDING PAGE — Cinematic Editorial -->
 <div class="lp" id="landing-page">
 
-  <!-- NAV -->
   <nav class="lp-nav">
-    <div class="lp-nav-logo">
-      <div class="lp-nav-logo-dot"><i class="ti ti-building-store"></i></div>
-      Mi Negocio
-    </div>
-    <div class="lp-nav-links">
-      <a href="#funciones">Funciones</a>
-      <a href="#rubros">Rubros</a>
-      <a href="#precios">Precios</a>
-    </div>
+    <div class="lp-nav-logo"><div class="lp-nav-logo-dot"><i class="ti ti-building-store"></i></div> Mi Negocio</div>
     <div class="lp-nav-actions">
       <button class="lp-btn-ghost" onclick="navTo('login')">Iniciar sesión</button>
       <button class="lp-btn-cta-nav" onclick="navTo('register')">Crear cuenta</button>
     </div>
   </nav>
 
-  <!-- HERO -->
   <div class="lp-hero">
     <div class="lp-hero-card">
-      <h1 class="lp-hero-h1">Gestioná tu comercio<br>sin complicaciones.</h1>
-      <p class="lp-hero-sub">Ventas, caja, fiados y productos en una sola app. Para cualquier rubro, desde el primer día.</p>
+      <h1 class="lp-hero-h1">Tu comercio,<br>bajo control.</h1>
+      <p class="lp-hero-sub">Ventas, caja, fiados y productos en una sola app. Gratis para empezar.</p>
       <div class="lp-hero-ctas">
         <button class="lp-cta-primary" onclick="navTo('register')">Empezar gratis</button>
         <button class="lp-cta-secondary" onclick="navTo('login')">Ya tengo cuenta</button>
@@ -896,108 +898,25 @@ input:checked+.toggle-track:before{transform:translateX(18px);}
           <span class="lp-mock-chip amber">Fiados $8.400</span>
         </div>
         <div class="lp-mock-bars">
-          <div class="lp-mock-bar" style="height:35%"></div>
-          <div class="lp-mock-bar" style="height:55%"></div>
-          <div class="lp-mock-bar" style="height:40%"></div>
-          <div class="lp-mock-bar" style="height:70%"></div>
-          <div class="lp-mock-bar" style="height:50%"></div>
-          <div class="lp-mock-bar" style="height:85%"></div>
+          <div class="lp-mock-bar" style="height:35%"></div><div class="lp-mock-bar" style="height:55%"></div>
+          <div class="lp-mock-bar" style="height:40%"></div><div class="lp-mock-bar" style="height:70%"></div>
+          <div class="lp-mock-bar" style="height:50%"></div><div class="lp-mock-bar" style="height:85%"></div>
           <div class="lp-mock-bar hi" style="height:100%"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="lp-stats">
-    <div class="lp-stat"><div class="lp-stat-num">+29</div><div class="lp-stat-lbl">rubros soportados</div></div>
-    <div class="lp-stat"><div class="lp-stat-num">14</div><div class="lp-stat-lbl">días gratis · sin tarjeta</div></div>
-    <div class="lp-stat"><div class="lp-stat-num">24/7</div><div class="lp-stat-lbl">soporte vía WhatsApp</div></div>
-    <div class="lp-stat"><div class="lp-stat-num">$0</div><div class="lp-stat-lbl">para empezar hoy</div></div>
+  <div class="lp-feats-strip">
+    <div class="lp-fs-item"><i class="ti ti-shopping-cart"></i> Ventas y caja diaria</div>
+    <div class="lp-fs-item"><i class="ti ti-users"></i> Fiados por cliente</div>
+    <div class="lp-fs-item"><i class="ti ti-package"></i> Catálogo por rubro</div>
+    <div class="lp-fs-item"><i class="ti ti-chart-line"></i> Gráficas de ventas</div>
   </div>
 
-  <!-- INTRO -->
-  <div class="lp-intro" id="funciones">
-    <h2 class="lp-intro-h">Elegimos las funciones que tu negocio realmente <mark>necesita</mark></h2>
-    <p class="lp-intro-sub">Sin planillas de Excel, sin complicaciones. Todo lo esencial en un solo lugar, desde el primer día.</p>
-  </div>
-
-  <!-- FEATURE CARDS -->
-  <div class="lp-cards-grid">
-    <div class="lp-card black">
-      <div class="lp-card-icon"><i class="ti ti-shopping-cart"></i></div>
-      <div class="lp-card-title">Ventas con múltiples medios de pago</div>
-      <div class="lp-card-sub">Efectivo, tarjeta, transferencia o fiado — todo en segundos.</div>
-    </div>
-    <div class="lp-card green">
-      <div class="lp-card-icon"><i class="ti ti-users"></i></div>
-      <div class="lp-card-title">Fiados y cuenta corriente</div>
-      <div class="lp-card-sub">Registrá fiados por cliente y llevá el control al día.</div>
-    </div>
-    <div class="lp-card gray">
-      <div class="lp-card-icon"><i class="ti ti-chart-line"></i></div>
-      <div class="lp-card-title">Gráficas de ventas</div>
-      <div class="lp-card-sub">Visualizá tendencias y tomá mejores decisiones.</div>
-    </div>
-    <div class="lp-card gray">
-      <div class="lp-card-icon"><i class="ti ti-package"></i></div>
-      <div class="lp-card-title">Catálogo pre-cargado</div>
-      <div class="lp-card-sub">Productos listos según tu rubro, sin cargar nada.</div>
-    </div>
-  </div>
-
-  <!-- RUBROS -->
-  <div class="lp-rubros-section" id="rubros">
-    <h3 class="lp-rubros-title">Soportamos tu rubro.</h3>
-    <p class="lp-rubros-sub">Más de 29 tipos de comercio con productos pre-cargados y categorías adaptadas a tu negocio.</p>
-    <div class="lp-rubros-cards">
-      <div class="lp-rubro-card"><i class="ti ti-bread"></i><span>Panadería / Confitería</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-pig"></i><span>Carnicería</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-salad"></i><span>Verdulería</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-candy"></i><span>Kiosco</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-pill"></i><span>Farmacia</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-shirt"></i><span>Ropa y accesorios</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-tools"></i><span>Ferretería</span></div>
-      <div class="lp-rubro-card"><i class="ti ti-plus"></i><span>+22 más</span></div>
-    </div>
-  </div>
-
-  <!-- SAFE SECTION -->
-  <div class="lp-safe-section">
-    <div class="lp-safe-card-green">
-      <h3>Tu caja, siempre bajo control.</h3>
-      <p>Cierre diario, historial de movimientos y acceso diferenciado para empleados. Sin riesgo, sin errores.</p>
-      <div class="lp-safe-icons">
-        <div class="lp-safe-icon-card"><i class="ti ti-lock"></i></div>
-        <div class="lp-safe-icon-card"><i class="ti ti-cloud"></i></div>
-        <div class="lp-safe-icon-card"><i class="ti ti-shield-check"></i></div>
-        <div class="lp-safe-icon-card"><i class="ti ti-users"></i></div>
-        <div class="lp-safe-icon-card"><i class="ti ti-history"></i></div>
-        <div class="lp-safe-icon-card"><i class="ti ti-device-mobile"></i></div>
-      </div>
-    </div>
-    <div class="lp-safe-card-gray">
-      <strong>Datos seguros en la nube</strong>
-      <p>Tus ventas, productos y fiados guardados en Firebase con autenticación segura. Accedé desde cualquier dispositivo.</p>
-      <p>Sin instalación. Sin perder datos. Sin sorpresas.</p>
-    </div>
-  </div>
-
-  <!-- PRICING -->
-  <div class="lp-pricing" id="precios">
-    <div class="lp-price-card">
-      <div class="lp-price-badge">Plan gratuito disponible</div>
-      <div class="lp-price-eyebrow">Empezá hoy mismo</div>
-      <div class="lp-price-num">$0</div>
-      <div class="lp-price-sub">Para siempre en el plan base.<br>Sin contratos, sin sorpresas.</div>
-      <button class="lp-price-cta" onclick="navTo('register')">Crear cuenta gratis</button>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
   <div class="lp-footer">
     <div class="lp-footer-logo"><i class="ti ti-building-store"></i> Mi Negocio</div>
-    <div class="lp-footer-copy">© 2025 · Hecho para comercios argentinos</div>
+    <div class="lp-footer-copy">© 2025 · Gratis para empezar</div>
   </div>
 
 </div>
